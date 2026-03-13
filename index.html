@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard de CPUs - CTime v7</title>
+    <title>CPUs - Obra 966</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
@@ -46,7 +46,7 @@
             <div class="text-indigo-600 mb-4 mt-2">
                 <i class="fas fa-hard-hat text-5xl"></i>
             </div>
-            <h2 class="text-2xl font-bold text-slate-800 mb-2">Painel de Orçamentos</h2>
+            <h2 class="text-2xl font-bold text-slate-800 mb-2">Painel de Controle - Obra 966</h2>
             <p class="text-slate-500 mb-8 text-sm">Acesso exclusivo para colaboradores. Faça login com seu e-mail corporativo <b>@seel.com.br</b> para continuar.</p>
             
             <div id="buttonDiv" class="flex justify-center mb-4 min-h-[40px]"></div>
@@ -56,10 +56,7 @@
                 <span id="login-erro-msg">Acesso negado.</span>
             </div>
 
-            <div class="mt-8 bg-slate-50 p-3 rounded text-xs text-slate-500 text-left border border-slate-100">
-                <p class="font-bold text-slate-700 mb-1"><i class="fas fa-code"></i> Faça Login na sua conta SEEL:</p>
-                <p>O acesso só é permitido para o dominio @seel.com.br.</p>
-            </div>
+        
         </div>
     </div>
 
@@ -138,7 +135,7 @@
                         <i id="icon-atualizar-resumo" class="fas fa-sync-alt"></i> Atualizar Dados
                     </button>
                 </div>
-                <!-- ... (Mesmo código da aba resumo original) ... -->
+                
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     <div class="bg-white rounded-lg shadow p-5 border-t-4 border-blue-500">
                         <h4 class="font-bold text-blue-800 border-b border-blue-100 pb-2 mb-4"><i class="fas fa-coins mr-2"></i> Receitas e Faturamento</h4>
@@ -285,7 +282,6 @@
 
         <!-- ABA: DASHBOARD DE CPU (MANUTENÇÃO) -->
         <div class="flex-1 overflow-y-auto p-4 md:p-6 hidden" id="dashboard-content">
-            <!-- ... (Mesmo código do Dashboard CPU original) ... -->
             <div class="mb-4 sm:hidden">
                 <button onclick="exportarExcel()" id="btn-exportar-mobile" class="w-full bg-blue-600 text-white px-3 py-3 rounded shadow font-bold flex justify-center items-center">
                     <i class="fas fa-file-excel mr-2"></i> Relatório Excel
@@ -393,7 +389,6 @@
     <div id="overlay" onclick="toggleSidebar()" class="fixed inset-0 bg-black bg-opacity-50 z-10 hidden md:hidden"></div>
 
     <div id="modal-insumo" class="fixed inset-0 bg-black bg-opacity-60 z-50 hidden flex items-center justify-center p-4">
-        <!-- ... (Mesmo código do Modal Inserir Insumo original) ... -->
         <div class="bg-white rounded-lg shadow-2xl w-full max-w-lg flex flex-col max-h-[90vh]">
             <div class="p-4 border-b flex justify-between items-center bg-slate-50 rounded-t-lg">
                 <h3 class="font-bold text-lg text-slate-800"><i class="fas fa-box-open text-indigo-500 mr-2"></i> Adicionar Insumo</h3>
@@ -591,14 +586,12 @@
                 const res = await fetch(url);
                 const json = await res.json();
                 
-                // LOG PARA DEBUG (Aperte F12 no navegador para ver o que o Google mandou)
                 console.log("Dados recebidos do Apps Script:", json.dados);
                 
                 if(json.status === "sucesso") {
                     estadoGlobal.cpus = json.dados.cpus; 
                     estadoGlobal.bancoInsumos = json.dados.bancoInsumos;
                     estadoGlobal.resumo = json.dados.resumo || {};
-                    // Prepara para receber ABC do backend se existir
                     estadoGlobal.abcInsumos = json.dados.abcInsumos || []; 
                     renderizarMenuLateral();
                 } else {
@@ -661,8 +654,75 @@
             return keyEncontrada ? parseFloat(estadoGlobal.resumo[keyEncontrada]) || 0 : 0; 
         }
 
-        async function atualizarResumoManual() { /* ... código original da V6 mantido ... */ }
-        function renderizarResumo() { /* ... código original da V6 mantido ... */ }
+        async function atualizarResumoManual() {
+            const btn = document.getElementById('btn-atualizar-resumo');
+            const icon = document.getElementById('icon-atualizar-resumo');
+            
+            icon.classList.add('fa-spin');
+            btn.disabled = true;
+            btn.classList.add('opacity-75');
+
+            try {
+                await carregarListaCPUs(); 
+                renderizarResumo(); 
+                showToast("Valores atualizados com sucesso da planilha!", "success");
+            } catch (e) {
+                showToast("Erro ao buscar dados atualizados.", "error");
+            } finally {
+                icon.classList.remove('fa-spin');
+                btn.disabled = false;
+                btn.classList.remove('opacity-75');
+            }
+        }
+
+        function renderizarResumo() {
+            const venda_total = getResumoVal('venda_total');
+            const faturamento_direto = getResumoVal('faturament_direto');
+            const venda_sem_faturamento = getResumoVal('venda_sem_faturamento_direto');
+            
+            const custo_direto = getResumoVal('custo_direto_total_cpu'); 
+            const custo_indireto = getResumoVal('custo_indireto_total');
+            const custo_total = getResumoVal('custo_total');
+            
+            const pis = getResumoVal('pis');
+            const cofins = getResumoVal('cofis') || getResumoVal('cofins');
+            const iss = getResumoVal('iss');
+            const total_impostos = pis + cofins + iss;
+
+            const venda_liquida = getResumoVal('venda_liquida');
+            const resultado = getResumoVal('resultado');
+            
+            let rawMargem = getResumoVal('margem_operacional');
+            let margemFormatada = rawMargem <= 1 && rawMargem !== 0 ? (rawMargem * 100).toFixed(2) : rawMargem.toFixed(2);
+
+            document.getElementById('res-venda-total').innerText = formatMoney(venda_total);
+            document.getElementById('res-fat-direto').innerText = formatMoney(faturamento_direto);
+            document.getElementById('res-venda-sem-fat').innerText = formatMoney(venda_sem_faturamento);
+            
+            document.getElementById('res-custo-direto').innerText = formatMoney(custo_direto);
+            document.getElementById('res-custo-indireto').innerText = formatMoney(custo_indireto);
+            document.getElementById('res-custo-total').innerText = formatMoney(custo_total);
+
+            document.getElementById('val-pis-calc').innerText = formatMoney(pis);
+            document.getElementById('val-cofins-calc').innerText = formatMoney(cofins);
+            document.getElementById('val-iss-calc').innerText = formatMoney(iss);
+            document.getElementById('res-total-impostos').innerText = formatMoney(total_impostos);
+
+            document.getElementById('res-venda-liquida').innerText = formatMoney(venda_liquida);
+            document.getElementById('res-resultado').innerText = formatMoney(resultado);
+            
+            const elMargem = document.getElementById('res-margem');
+            elMargem.innerText = margemFormatada + '%';
+
+            const elRes = document.getElementById('res-resultado');
+            if(resultado < 0) {
+                elRes.classList.remove('text-emerald-400'); elRes.classList.add('text-red-400');
+                elMargem.classList.remove('text-emerald-300'); elMargem.classList.add('text-red-300');
+            } else {
+                elRes.classList.remove('text-red-400'); elRes.classList.add('text-emerald-400');
+                elMargem.classList.remove('text-red-300'); elMargem.classList.add('text-emerald-300');
+            }
+        }
 
         // ==========================================
         // ABA: TABELA DE CPUS
@@ -899,7 +959,7 @@
             limparAlteracao(); 
         }
 
-        function renderizarInsumos() { /* ... código original da V6 mantido ... */ 
+        function renderizarInsumos() { 
             const tbody = document.getElementById('tabela-insumos');
             tbody.innerHTML = '';
             estadoGlobal.cpuAtual.insumos.forEach((ins, index) => {
@@ -922,7 +982,7 @@
             });
         }
 
-        function recalcularCPU(origem = 'outro') { /* ... código original da V6 mantido ... */ 
+        function recalcularCPU(origem = 'outro') { 
             if(!estadoGlobal.cpuAtual) return;
             const pt = parseFloat(document.getElementById('input-pt').value) || 1;
             const prat = parseFloat(document.getElementById('input-praticabilidade').value) || 1;
@@ -964,7 +1024,7 @@
             registrarAlteracao();
         }
 
-        async function salvarAlteracoes() { /* ... código original da V6 mantido ... */ 
+        async function salvarAlteracoes() { 
             const btn = document.getElementById('btn-salvar');
             btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-1"></i> Salvando...'; btn.disabled = true;
 
@@ -990,9 +1050,67 @@
         }
 
         // ==========================================
-        // OUTRAS FUNÇÕES E MOCKS MANTIDAS IGUAIS
+        // OUTRAS FUNÇÕES E MOCKS (RESTAURADAS COMPLETAS)
         // ==========================================
-        function exportarExcel() { /* ... Excel export logic mantido ... */ showToast("Gerando Excel...", "info"); }
+        function exportarExcel() {
+            if(estadoGlobal.cpus.length === 0) return showToast("Sem CPUs para exportar.", "error");
+            showToast("Gerando Excel...", "info");
+            
+            let dadosExcel = [];
+            estadoGlobal.cpus.forEach(cpu => {
+                const pt = parseFloat(cpu.prod_teorica) || 1;
+                const prat = parseFloat(cpu.praticabilidade) || 1;
+                const hd = parseFloat(cpu.horas_dia) || 8.8;
+                let p = hd > 0 ? (pt * prat) / hd : 1;
+                if (p <= 0) p = 1;
+
+                const qtd = cpu.quantidade_prevista || 1;
+                const venda = cpu.preco_venda || 0;
+                
+                let custoTotalCPU = 0;
+                if(cpu.insumos) {
+                    cpu.insumos.forEach(ins => {
+                        const coef = parseFloat(ins.coef) || 0;
+                        const pr_unit = parseFloat(ins.pr_unit) || 0;
+                        custoTotalCPU += (coef * pr_unit);
+                    });
+                }
+                
+                const custoTotalServico = custoTotalCPU * qtd;
+                const fcd = custoTotalServico > 0 ? ((venda * qtd) / custoTotalServico) : 0;
+
+                if(!cpu.insumos || cpu.insumos.length === 0) {
+                    dadosExcel.push({ 
+                        "ID CPU": cpu.id, "Nome CPU": cpu.nome, "Unidade": cpu.unidade, 
+                        "PT (dia)": pt, "PRAT": prat, "HD": hd, "P (hora)": p, 
+                        "Qtd Prevista": qtd, "Custo Unit": 0, "Custo Total": 0, "Venda Unit": venda, "Venda Total": venda * qtd, "F/CD": fcd,
+                        "Insumo": "-", "Coeficiente": 0, "Custo Linha Unit": 0 
+                    });
+                } else {
+                    cpu.insumos.forEach(ins => {
+                        const coef = parseFloat(ins.coef) || 0;
+                        const pr_unit = parseFloat(ins.pr_unit) || 0;
+                        let custoLinha = coef * pr_unit;
+                        
+                        dadosExcel.push({
+                            "ID CPU": cpu.id, "Nome CPU": cpu.nome, "Unidade": cpu.unidade,
+                            "PT (dia)": pt, "PRAT": prat, "HD": hd, "P (hora)": p,
+                            "Qtd Prevista": qtd, "Custo Unit": custoTotalCPU, "Custo Total Serviço": custoTotalServico, 
+                            "Venda Unit": venda, "Venda Total": venda * qtd, "F/CD": fcd,
+                            "Tipo Insumo": ins.tipo, "Insumo": ins.descricao, "Unid Insumo": ins.unid,
+                            "Coeficiente": coef, "R$ Unit Insumo": pr_unit, "R$ Custo CPU (Linha)": custoLinha
+                        });
+                    });
+                }
+            });
+
+            const ws = XLSX.utils.json_to_sheet(dadosExcel);
+            ws['!cols'] = [{wch:10}, {wch:35}, {wch:8}, {wch:8}, {wch:8}, {wch:8}, {wch:8}, {wch:12}, {wch:12}, {wch:15}, {wch:12}, {wch:15}, {wch:8}, {wch:15}, {wch:40}, {wch:10}, {wch:10}, {wch:12}, {wch:15}];
+            const wb = XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb, ws, "Memória Analítica CPUs");
+            XLSX.writeFile(wb, `Memoria_Analitica_CTime_${new Date().toISOString().split('T')[0]}.xlsx`);
+            showToast("Relatório exportado!", "success");
+        }
+
         function atualizarInsumo(i, campo, val) { estadoGlobal.cpuAtual.insumos[i][campo] = (campo==='descricao'||campo==='unid') ? val : parseFloat(val)||0; recalcularCPU('insumo'); }
         function removerInsumo(i) { if(confirm("Remover insumo?")) { estadoGlobal.cpuAtual.insumos.splice(i, 1); renderizarInsumos(); recalcularCPU('insumo'); } }
         
@@ -1014,13 +1132,29 @@
         async function cadastrarEAdicionarInsumo() {
             const n = { id_insumo: "NEW_"+Date.now(), tipo: document.getElementById('novo-insumo-tipo').value, descricao: document.getElementById('novo-insumo-desc').value, unid: document.getElementById('novo-insumo-unid').value, pr_unit: parseFloat(document.getElementById('novo-insumo-preco').value)||0 };
             if(!n.descricao || !n.unid) return showToast("Preencha descrição e unidade.", "error");
-            if(API_URL.includes("script.google.com")) { /* ... fetch logic ... */ }
+            if(API_URL.includes("script.google.com")) {
+                const payload = { action: "cadastrarInsumo", dados: n, usuario: estadoGlobal.usuarioLogado };
+                const res = await fetch(API_URL, { method: 'POST', body: JSON.stringify(payload) });
+                const json = await res.json(); if(json.novo_id) n.id_insumo = json.novo_id;
+            }
             estadoGlobal.bancoInsumos.push(n); estadoGlobal.cpuAtual.insumos.push({ ...n, coef: 1 });
             fecharModalInsumo(); renderizarInsumos(); recalcularCPU('insumo');
         }
 
-        function renderizarComentarios() { /* ... comments render ... */ }
-        function addComentario() { /* ... add comment ... */ }
+        function renderizarComentarios() { 
+            const lista = document.getElementById('lista-comentarios'); lista.innerHTML = '';
+            estadoGlobal.cpuAtual.comentarios.forEach(c => lista.innerHTML += `<div class="bg-indigo-50 p-3 rounded border text-sm"><div class="flex justify-between font-bold text-indigo-800 mb-1"><span><i class="fas fa-user-circle"></i> ${c.autor}</span><span class="font-normal text-xs text-indigo-400">${c.data}</span></div><p class="text-slate-700">${c.texto}</p></div>`);
+        }
+        
+        function addComentario() { 
+            const txt = document.getElementById('novo-comentario').value; if(!txt) return;
+            const nomeAutor = estadoGlobal.usuarioLogado ? estadoGlobal.usuarioLogado.split('@')[0] : "Usuário Web";
+            
+            estadoGlobal.cpuAtual.comentarios.unshift({ data: new Date().toISOString().split('T')[0], autor: nomeAutor, texto: txt });
+            document.getElementById('novo-comentario').value = ''; 
+            renderizarComentarios();
+            registrarAlteracao(); 
+        }
 
         function simularDadosMocados() {
             estadoGlobal.bancoInsumos = [{id_insumo:"E1",tipo:"Equipamento",descricao:"Munck",unid:"h",pr_unit:120.5},{id_insumo:"M1",tipo:"Mão de Obra",descricao:"Pedreiro",unid:"h",pr_unit:35}, {id_insumo:"M2",tipo:"Mão de Obra",descricao:"Ajudante",unid:"h",pr_unit:20}, {id_insumo:"MAT1",tipo:"Material",descricao:"Cimento Portland CP-II",unid:"sc",pr_unit:32.50}];
