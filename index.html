@@ -55,8 +55,6 @@
                 <i class="fas fa-exclamation-circle mt-1 mr-2"></i>
                 <span id="login-erro-msg">Acesso negado.</span>
             </div>
-
-        
         </div>
     </div>
 
@@ -104,9 +102,6 @@
                 <span id="cpu-unidade" class="ml-3 bg-slate-200 text-slate-600 px-2 py-1 rounded text-sm font-bold">--</span>
             </div>
             <div class="text-right flex items-center gap-3 md:gap-4">
-                <button onclick="exportarExcel()" id="btn-exportar" class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded shadow transition text-sm flex items-center hidden sm:flex">
-                    <i class="fas fa-file-excel mr-1"></i> Excel
-                </button>
                 
                 <div id="container-custo-total-header" class="hidden md:block text-right">
                     <div class="text-sm text-slate-500 leading-tight">Custo Total<br>do Serviço:</div>
@@ -128,8 +123,8 @@
             <div class="max-w-6xl mx-auto">
                 <div class="flex flex-col sm:flex-row justify-between items-center bg-white p-4 rounded-lg shadow mb-6 border-l-4 border-indigo-500">
                     <div class="mb-3 sm:mb-0 text-slate-600">
-                        <p class="font-bold"><i class="fas fa-info-circle mr-1"></i> Dados sincronizados da aba "Resumo"</p>
-                        <p class="text-xs">Para atualizar os valores após alterações na planilha, clique no botão ao lado.</p>
+                        <p class="font-bold"><i class="fas fa-info-circle mr-1"></i> Visão Geral de Custos e Desvios</p>
+                        <p class="text-xs">Valores atuais das planilhas comparados ao Orçamento Original (Contrato).</p>
                     </div>
                     <button id="btn-atualizar-resumo" onclick="atualizarResumoManual()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded font-bold shadow transition flex items-center gap-2">
                         <i id="icon-atualizar-resumo" class="fas fa-sync-alt"></i> Atualizar Dados
@@ -139,72 +134,124 @@
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     <div class="bg-white rounded-lg shadow p-5 border-t-4 border-blue-500">
                         <h4 class="font-bold text-blue-800 border-b border-blue-100 pb-2 mb-4"><i class="fas fa-coins mr-2"></i> Receitas e Faturamento</h4>
-                        <div class="flex justify-between items-center mb-3">
-                            <span class="text-slate-600 font-medium">Venda Total Bruta</span>
-                            <span id="res-venda-total" class="font-bold text-xl text-slate-800">R$ 0,00</span>
+                        
+                        <div class="flex justify-between items-start mb-3 border-b border-slate-50 pb-2">
+                            <span class="text-slate-600 font-medium mt-1">Venda Total Bruta</span>
+                            <div class="text-right">
+                                <div id="res-venda-total" class="font-bold text-lg text-slate-800 leading-none">R$ 0,00</div>
+                                <div class="text-[11px] text-slate-400 mt-1">Orçado: <span id="orig-venda-total">R$ 0,00</span> <span id="diff-venda-total" class="ml-1"></span></div>
+                            </div>
                         </div>
-                        <div class="flex justify-between items-center mb-3 p-2 bg-blue-50 rounded border border-blue-100">
-                            <span class="text-blue-800 font-bold text-sm">(-) Faturamento Direto</span>
-                            <span id="res-fat-direto" class="font-bold text-lg text-blue-900">R$ 0,00</span>
+                        
+                        <div class="flex justify-between items-start mb-3 bg-blue-50/50 p-2 rounded border border-blue-50 pb-2">
+                            <span class="text-blue-800 font-bold text-sm mt-1">(-) Faturamento Direto</span>
+                            <div class="text-right">
+                                <div id="res-fat-direto" class="font-bold text-lg text-blue-900 leading-none">R$ 0,00</div>
+                                <div class="text-[11px] text-slate-400 mt-1">Orçado: <span id="orig-fat-direto">R$ 0,00</span> <span id="diff-fat-direto" class="ml-1"></span></div>
+                            </div>
                         </div>
-                        <div class="flex justify-between items-center mt-4 pt-3 border-t">
-                            <span class="font-bold text-slate-700">Venda s/ Faturamento Direto</span>
-                            <span id="res-venda-sem-fat" class="font-black text-xl text-blue-600">R$ 0,00</span>
+
+                        <div class="flex justify-between items-start mt-4 pt-3 border-t">
+                            <span class="font-bold text-slate-700 mt-1">Venda s/ Faturamento</span>
+                            <div class="text-right">
+                                <div id="res-venda-sem-fat" class="font-black text-xl text-blue-600 leading-none">R$ 0,00</div>
+                                <div class="text-[11px] text-slate-400 mt-1">Orçado: <span id="orig-venda-sem-fat">R$ 0,00</span> <span id="diff-venda-sem-fat" class="ml-1"></span></div>
+                            </div>
                         </div>
                     </div>
 
                     <div class="bg-white rounded-lg shadow p-5 border-t-4 border-orange-500">
                         <h4 class="font-bold text-orange-800 border-b border-orange-100 pb-2 mb-4"><i class="fas fa-tools mr-2"></i> Estrutura de Custos</h4>
-                        <div class="flex justify-between items-center mb-3">
-                            <span class="text-slate-600 font-medium">Custo Direto Total CPU</span>
-                            <span id="res-custo-direto" class="font-bold text-lg text-slate-800">R$ 0,00</span>
+                        
+                        <div class="flex justify-between items-start mb-3 border-b border-slate-50 pb-2">
+                            <span class="text-slate-600 font-medium mt-1">Custo Direto Total CPU</span>
+                            <div class="text-right">
+                                <div id="res-custo-direto" class="font-bold text-lg text-slate-800 leading-none">R$ 0,00</div>
+                                <div class="text-[11px] text-slate-400 mt-1">Orçado: <span id="orig-custo-direto">R$ 0,00</span> <span id="diff-custo-direto" class="ml-1"></span></div>
+                            </div>
                         </div>
-                        <div class="flex justify-between items-center mb-3">
-                            <span class="text-slate-600 font-medium">Custo Indireto Total</span>
-                            <span id="res-custo-indireto" class="font-bold text-lg text-slate-800">R$ 0,00</span>
+                        
+                        <div class="flex justify-between items-start mb-3 border-b border-slate-50 pb-2">
+                            <span class="text-slate-600 font-medium mt-1">Custo Indireto Total</span>
+                            <div class="text-right">
+                                <div id="res-custo-indireto" class="font-bold text-lg text-slate-800 leading-none">R$ 0,00</div>
+                                <div class="text-[11px] text-slate-400 mt-1">Orçado: <span id="orig-custo-indireto">R$ 0,00</span> <span id="diff-custo-indireto" class="ml-1"></span></div>
+                            </div>
                         </div>
-                        <div class="flex justify-between items-center mt-4 pt-3 border-t">
-                            <span class="font-bold text-slate-700">Custo Total Global</span>
-                            <span id="res-custo-total" class="font-black text-xl text-orange-600">R$ 0,00</span>
+
+                        <div class="flex justify-between items-start mt-4 pt-3 border-t">
+                            <span class="font-bold text-slate-700 mt-1">Custo Total Global</span>
+                            <div class="text-right">
+                                <div id="res-custo-total" class="font-black text-xl text-orange-600 leading-none">R$ 0,00</div>
+                                <div class="text-[11px] text-slate-400 mt-1">Orçado: <span id="orig-custo-total">R$ 0,00</span> <span id="diff-custo-total" class="ml-1"></span></div>
+                            </div>
                         </div>
                     </div>
 
                     <div class="bg-white rounded-lg shadow p-5 border-t-4 border-red-500">
                         <h4 class="font-bold text-red-800 border-b border-red-100 pb-2 mb-4"><i class="fas fa-percentage mr-2"></i> Impostos</h4>
-                        <div class="flex justify-between items-center mb-3">
-                            <span class="text-slate-600 font-medium">PIS</span>
-                            <span id="val-pis-calc" class="font-bold text-slate-800">R$ 0,00</span>
+                        
+                        <div class="flex justify-between items-start mb-3 border-b border-slate-50 pb-2">
+                            <span class="text-slate-600 font-medium mt-1">PIS</span>
+                            <div class="text-right">
+                                <div id="val-pis-calc" class="font-bold text-slate-800 leading-none">R$ 0,00</div>
+                                <div class="text-[11px] text-slate-400 mt-1">Orç: <span id="orig-pis-calc">R$ 0,00</span> <span id="diff-pis-calc" class="ml-1"></span></div>
+                            </div>
                         </div>
-                        <div class="flex justify-between items-center mb-3">
-                            <span class="text-slate-600 font-medium">COFINS</span>
-                            <span id="val-cofins-calc" class="font-bold text-slate-800">R$ 0,00</span>
+
+                        <div class="flex justify-between items-start mb-3 border-b border-slate-50 pb-2">
+                            <span class="text-slate-600 font-medium mt-1">COFINS</span>
+                            <div class="text-right">
+                                <div id="val-cofins-calc" class="font-bold text-slate-800 leading-none">R$ 0,00</div>
+                                <div class="text-[11px] text-slate-400 mt-1">Orç: <span id="orig-cofins-calc">R$ 0,00</span> <span id="diff-cofins-calc" class="ml-1"></span></div>
+                            </div>
                         </div>
-                        <div class="flex justify-between items-center mb-3">
-                            <span class="text-slate-600 font-medium">ISS</span>
-                            <span id="val-iss-calc" class="font-bold text-slate-800">R$ 0,00</span>
+
+                        <div class="flex justify-between items-start mb-3 border-b border-slate-50 pb-2">
+                            <span class="text-slate-600 font-medium mt-1">ISS</span>
+                            <div class="text-right">
+                                <div id="val-iss-calc" class="font-bold text-slate-800 leading-none">R$ 0,00</div>
+                                <div class="text-[11px] text-slate-400 mt-1">Orç: <span id="orig-iss-calc">R$ 0,00</span> <span id="diff-iss-calc" class="ml-1"></span></div>
+                            </div>
                         </div>
-                        <div class="flex justify-between items-center mt-3 pt-3 border-t">
-                            <span class="font-bold text-slate-700">Total de Impostos</span>
-                            <span id="res-total-impostos" class="font-bold text-lg text-red-500">R$ 0,00</span>
+
+                        <div class="flex justify-between items-start mt-3 pt-3 border-t">
+                            <span class="font-bold text-slate-700 mt-1">Total de Impostos</span>
+                            <div class="text-right">
+                                <div id="res-total-impostos" class="font-bold text-lg text-red-500 leading-none">R$ 0,00</div>
+                                <div class="text-[11px] text-slate-400 mt-1">Orçado: <span id="orig-total-impostos">R$ 0,00</span> <span id="diff-total-impostos" class="ml-1"></span></div>
+                            </div>
                         </div>
                     </div>
 
                     <div class="bg-slate-800 text-white rounded-lg shadow p-5 border-t-4 border-emerald-500 relative overflow-hidden">
                         <i class="fas fa-chart-line absolute -bottom-4 -right-4 text-8xl text-slate-700 opacity-50"></i>
                         <h4 class="font-bold text-emerald-400 border-b border-slate-700 pb-2 mb-4 relative z-10"><i class="fas fa-trophy mr-2"></i> DRE / Resultado do Contrato</h4>
-                        <div class="flex justify-between items-center mb-3 relative z-10">
-                            <span class="text-slate-300 font-medium">Venda Líquida</span>
-                            <span id="res-venda-liquida" class="font-bold text-lg text-white">R$ 0,00</span>
+                        
+                        <div class="flex justify-between items-start mb-3 relative z-10 border-b border-slate-700 pb-3">
+                            <span class="text-slate-300 font-medium mt-1">Venda Líquida</span>
+                            <div class="text-right">
+                                <div id="res-venda-liquida" class="font-bold text-lg text-white leading-none">R$ 0,00</div>
+                                <div class="text-[11px] text-slate-400 mt-1">Orçado: <span id="orig-venda-liquida" class="text-slate-300">R$ 0,00</span> <span id="diff-venda-liquida" class="ml-1"></span></div>
+                            </div>
                         </div>
-                        <div class="flex justify-between items-center mt-6 pt-3 border-t border-slate-700 relative z-10">
-                            <span class="font-bold text-emerald-300">Resultado Operacional</span>
-                            <span id="res-resultado" class="font-black text-3xl text-emerald-400">R$ 0,00</span>
+                        
+                        <div class="flex justify-between items-start mt-6 relative z-10">
+                            <span class="font-bold text-emerald-300 mt-1">Resultado Operacional</span>
+                            <div class="text-right">
+                                <div id="res-resultado" class="font-black text-2xl text-emerald-400 leading-none">R$ 0,00</div>
+                                <div class="text-[11px] text-slate-400 mt-2">Orçado: <span id="orig-resultado" class="text-slate-300">R$ 0,00</span> <span id="diff-resultado" class="ml-1"></span></div>
+                            </div>
                         </div>
-                        <div class="flex justify-between items-center mt-2 relative z-10">
-                            <span class="font-bold text-slate-400 text-sm">Margem Operacional</span>
-                            <span id="res-margem" class="font-black text-xl text-emerald-300 bg-slate-900 px-3 py-1 rounded">0,00%</span>
+                        
+                        <div class="flex justify-between items-start mt-6 relative z-10">
+                            <span class="font-bold text-slate-400 text-sm mt-1">Margem Operacional</span>
+                            <div class="text-right flex flex-col items-end">
+                                <div id="res-margem" class="font-black text-xl text-emerald-300 bg-slate-900 px-3 py-1 rounded inline-block leading-none">0,00%</div>
+                                <div class="text-[11px] text-slate-400 mt-2">Orçado: <span id="orig-margem" class="text-slate-300">0,00%</span> <span id="diff-margem" class="ml-1"></span></div>
+                            </div>
                         </div>
-                        <p class="text-xs text-slate-400 mt-4 relative z-10 text-right opacity-70">*Os valores acima são o reflexo exato da aba "Resumo" da planilha.</p>
+                        <p class="text-[10px] text-slate-500 mt-4 relative z-10 text-right opacity-70">*Desvios em vermelho indicam impacto negativo no contrato.</p>
                     </div>
                 </div>
             </div>
@@ -215,8 +262,14 @@
             <div class="max-w-7xl mx-auto bg-white rounded-lg shadow border border-slate-200">
                 <div class="p-4 border-b flex flex-col md:flex-row justify-between items-center bg-slate-50 rounded-t-lg gap-4">
                     <h2 class="text-xl font-bold text-slate-800"><i class="fas fa-list mr-2 text-blue-600"></i> Relatório Geral de CPUs</h2>
-                    <div class="flex items-center gap-2 w-full md:w-auto">
-                        <div class="relative w-full md:w-80">
+                    <div class="flex flex-wrap items-center gap-2 w-full md:w-auto">
+                        <button onclick="exportarListaCPUs()" class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded text-sm shadow transition flex items-center whitespace-nowrap">
+                            <i class="fas fa-file-excel mr-2"></i> Lista CPUs
+                        </button>
+                        <button onclick="exportarComposicoes()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-2 rounded text-sm shadow transition flex items-center whitespace-nowrap">
+                            <i class="fas fa-sitemap mr-2"></i> Composições
+                        </button>
+                        <div class="relative w-full md:w-64 mt-2 md:mt-0">
                             <i class="fas fa-search absolute left-3 top-2.5 text-slate-400"></i>
                             <input type="text" id="filtro-tabela-cpus" onkeyup="renderizarTabelaCPUs()" placeholder="Pesquisar CPU..." class="pl-9 border border-slate-300 rounded p-2 text-sm focus:outline-none focus:border-blue-500 bg-white font-medium text-slate-700 shadow-sm w-full">
                         </div>
@@ -244,7 +297,7 @@
         </div>
 
         <!-- ========================================== -->
-        <!-- ABA: ABC DE INSUMOS (NOVA!)                -->
+        <!-- ABA: ABC DE INSUMOS                        -->
         <!-- ========================================== -->
         <div id="abc-insumos-content" class="flex-1 overflow-y-auto p-4 md:p-6 bg-slate-100 hidden">
             <div class="max-w-7xl mx-auto bg-white rounded-lg shadow border border-slate-200">
@@ -253,8 +306,11 @@
                         <h2 class="text-xl font-bold text-slate-800"><i class="fas fa-cubes mr-2 text-purple-600"></i> Curva ABC de Insumos</h2>
                         <p class="text-xs text-slate-500 mt-1">Visão consolidada do consumo global do contrato. Clique em um insumo para ver onde ele é utilizado.</p>
                     </div>
-                    <div class="flex items-center gap-2 w-full md:w-auto">
-                        <div class="relative w-full md:w-80">
+                    <div class="flex flex-wrap items-center gap-2 w-full md:w-auto">
+                        <button onclick="exportarABC()" class="bg-purple-600 hover:bg-purple-700 text-white px-3 py-2 rounded text-sm shadow transition flex items-center whitespace-nowrap">
+                            <i class="fas fa-file-excel mr-2"></i> Exportar ABC
+                        </button>
+                        <div class="relative w-full md:w-64 mt-2 md:mt-0">
                             <i class="fas fa-search absolute left-3 top-2.5 text-slate-400"></i>
                             <input type="text" id="filtro-tabela-abc" onkeyup="renderizarTabelaABC()" placeholder="Pesquisar Insumo..." class="pl-9 border border-slate-300 rounded p-2 text-sm focus:outline-none focus:border-purple-50 bg-white font-medium text-slate-700 shadow-sm w-full">
                         </div>
@@ -282,9 +338,11 @@
 
         <!-- ABA: DASHBOARD DE CPU (MANUTENÇÃO) -->
         <div class="flex-1 overflow-y-auto p-4 md:p-6 hidden" id="dashboard-content">
-            <div class="mb-4 sm:hidden">
-                <button onclick="exportarExcel()" id="btn-exportar-mobile" class="w-full bg-blue-600 text-white px-3 py-3 rounded shadow font-bold flex justify-center items-center">
-                    <i class="fas fa-file-excel mr-2"></i> Relatório Excel
+            
+            <div class="flex justify-between items-end mb-4 border-b border-slate-200 pb-2">
+                <h2 class="text-lg font-bold text-slate-700">Parâmetros e Cálculo</h2>
+                <button onclick="exportarFichaCPU()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-2 rounded text-sm shadow transition flex items-center">
+                    <i class="fas fa-file-excel mr-2"></i> Exportar Ficha CPU
                 </button>
             </div>
 
@@ -490,7 +548,7 @@
 
         // Sort Tabela ABC
         let currentSortColABC = 'custoTotal';
-        let currentSortDirABC = 'desc'; // Padrão da Curva ABC é do maior custo pro menor
+        let currentSortDirABC = 'desc'; 
 
         // ==========================================
         // SISTEMA DE LOGIN GOOGLE (GSI)
@@ -636,7 +694,7 @@
         }
 
         // ==========================================
-        // ABA: RESUMO
+        // ABA: RESUMO (ATUALIZADA COM DESVIOS)
         // ==========================================
         function abrirAbaResumo() {
             if (!verificarPendencias()) return;
@@ -657,7 +715,6 @@
         async function atualizarResumoManual() {
             const btn = document.getElementById('btn-atualizar-resumo');
             const icon = document.getElementById('icon-atualizar-resumo');
-            
             icon.classList.add('fa-spin');
             btn.disabled = true;
             btn.classList.add('opacity-75');
@@ -675,7 +732,37 @@
             }
         }
 
+        // Função utilitária para renderizar as diferenças com cor inteligente
+        function renderDiff(atual, original, idDiff, isCost = false, isPercent = false) {
+            const el = document.getElementById(idDiff);
+            if(!el) return;
+            
+            const diff = atual - original;
+            
+            if (Math.abs(diff) < 0.01) {
+                el.innerHTML = "(=)";
+                el.className = "ml-1 font-bold text-slate-400";
+                return;
+            }
+            
+            // Lógica de Cor: Se for custo, aumento é ruim (vermelho). Se for receita, aumento é bom (verde)
+            let isBad = isCost ? diff > 0 : diff < 0;
+            let color = isBad ? "text-red-500" : "text-emerald-500";
+            
+            // Ajuste para o card escuro do DRE
+            if (el.closest('.bg-slate-800')) {
+                color = isBad ? "text-red-400" : "text-emerald-400";
+            }
+            
+            const prefix = diff > 0 ? "+" : "";
+            const formatted = isPercent ? `${prefix}${diff.toFixed(2)}%` : `${prefix}${formatMoney(diff)}`;
+            
+            el.innerHTML = `(Δ ${formatted})`;
+            el.className = `ml-1 font-bold ${color}`;
+        }
+
         function renderizarResumo() {
+            // Valores Atuais (Planilha viva)
             const venda_total = getResumoVal('venda_total');
             const faturamento_direto = getResumoVal('faturament_direto');
             const venda_sem_faturamento = getResumoVal('venda_sem_faturamento_direto');
@@ -693,28 +780,76 @@
             const resultado = getResumoVal('resultado');
             
             let rawMargem = getResumoVal('margem_operacional');
-            let margemFormatada = rawMargem <= 1 && rawMargem !== 0 ? (rawMargem * 100).toFixed(2) : rawMargem.toFixed(2);
+            let margemAtu = rawMargem <= 1 && rawMargem !== 0 ? (rawMargem * 100) : rawMargem;
 
+            // Valores Originais do Orçamento (Coluna N em diante no Sheets)
+            const orig_venda_total = getResumoVal('orig_venda_total');
+            const orig_fat_direto = getResumoVal('orig_faturament_direto');
+            const orig_venda_sem_fat = getResumoVal('orig_venda_sem_faturamento_direto');
+            const orig_custo_direto = getResumoVal('orig_custo_direto_total_cpu'); 
+            const orig_custo_indireto = getResumoVal('orig_custo_indireto_total');
+            const orig_custo_total = getResumoVal('orig_custo_total');
+            const orig_pis = getResumoVal('orig_pis');
+            const orig_cofins = getResumoVal('orig_cofis') || getResumoVal('orig_cofins');
+            const orig_iss = getResumoVal('orig_iss');
+            const orig_total_impostos = orig_pis + orig_cofins + orig_iss;
+            const orig_venda_liquida = getResumoVal('orig_venda_liquida');
+            const orig_resultado = getResumoVal('orig_resultado');
+            
+            let rawMargemOrig = getResumoVal('orig_margem_operacional');
+            let margemOrig = rawMargemOrig <= 1 && rawMargemOrig !== 0 ? (rawMargemOrig * 100) : rawMargemOrig;
+
+            // ATUALIZANDO TEXTOS PRINCIPAIS
             document.getElementById('res-venda-total').innerText = formatMoney(venda_total);
             document.getElementById('res-fat-direto').innerText = formatMoney(faturamento_direto);
             document.getElementById('res-venda-sem-fat').innerText = formatMoney(venda_sem_faturamento);
-            
             document.getElementById('res-custo-direto').innerText = formatMoney(custo_direto);
             document.getElementById('res-custo-indireto').innerText = formatMoney(custo_indireto);
             document.getElementById('res-custo-total').innerText = formatMoney(custo_total);
-
             document.getElementById('val-pis-calc').innerText = formatMoney(pis);
             document.getElementById('val-cofins-calc').innerText = formatMoney(cofins);
             document.getElementById('val-iss-calc').innerText = formatMoney(iss);
             document.getElementById('res-total-impostos').innerText = formatMoney(total_impostos);
-
             document.getElementById('res-venda-liquida').innerText = formatMoney(venda_liquida);
             document.getElementById('res-resultado').innerText = formatMoney(resultado);
-            
-            const elMargem = document.getElementById('res-margem');
-            elMargem.innerText = margemFormatada + '%';
+            document.getElementById('res-margem').innerText = margemAtu.toFixed(2) + '%';
 
+            // ATUALIZANDO OS TEXTOS DE "ORÇADO"
+            document.getElementById('orig-venda-total').innerText = formatMoney(orig_venda_total);
+            document.getElementById('orig-fat-direto').innerText = formatMoney(orig_fat_direto);
+            document.getElementById('orig-venda-sem-fat').innerText = formatMoney(orig_venda_sem_fat);
+            document.getElementById('orig-custo-direto').innerText = formatMoney(orig_custo_direto);
+            document.getElementById('orig-custo-indireto').innerText = formatMoney(orig_custo_indireto);
+            document.getElementById('orig-custo-total').innerText = formatMoney(orig_custo_total);
+            document.getElementById('orig-pis-calc').innerText = formatMoney(orig_pis);
+            document.getElementById('orig-cofins-calc').innerText = formatMoney(orig_cofins);
+            document.getElementById('orig-iss-calc').innerText = formatMoney(orig_iss);
+            document.getElementById('orig-total-impostos').innerText = formatMoney(orig_total_impostos);
+            document.getElementById('orig-venda-liquida').innerText = formatMoney(orig_venda_liquida);
+            document.getElementById('orig-resultado').innerText = formatMoney(orig_resultado);
+            document.getElementById('orig-margem').innerText = margemOrig.toFixed(2) + '%';
+
+            // ATUALIZANDO OS CÁLCULOS DE DESVIO (DIFF)
+            renderDiff(venda_total, orig_venda_total, 'diff-venda-total', false);
+            renderDiff(faturamento_direto, orig_fat_direto, 'diff-fat-direto', false); 
+            renderDiff(venda_sem_faturamento, orig_venda_sem_fat, 'diff-venda-sem-fat', false);
+            
+            renderDiff(custo_direto, orig_custo_direto, 'diff-custo-direto', true); // Custo: Positivo é Ruim
+            renderDiff(custo_indireto, orig_custo_indireto, 'diff-custo-indireto', true);
+            renderDiff(custo_total, orig_custo_total, 'diff-custo-total', true);
+            
+            renderDiff(pis, orig_pis, 'diff-pis-calc', true);
+            renderDiff(cofins, orig_cofins, 'diff-cofins-calc', true);
+            renderDiff(iss, orig_iss, 'diff-iss-calc', true);
+            renderDiff(total_impostos, orig_total_impostos, 'diff-total-impostos', true);
+            
+            renderDiff(venda_liquida, orig_venda_liquida, 'diff-venda-liquida', false);
+            renderDiff(resultado, orig_resultado, 'diff-resultado', false); // Receita/Lucro: Positivo é Bom
+            renderDiff(margemAtu, margemOrig, 'diff-margem', false, true);
+
+            // Tratamento visual para o Card Final Escuro
             const elRes = document.getElementById('res-resultado');
+            const elMargem = document.getElementById('res-margem');
             if(resultado < 0) {
                 elRes.classList.remove('text-emerald-400'); elRes.classList.add('text-red-400');
                 elMargem.classList.remove('text-emerald-300'); elMargem.classList.add('text-red-300');
@@ -794,7 +929,7 @@
         }
 
         // ==========================================
-        // ABA: ABC DE INSUMOS (NOVIDADE V7)
+        // ABA: ABC DE INSUMOS
         // ==========================================
         function abrirAbaABC() {
             if (!verificarPendencias()) return;
@@ -815,7 +950,6 @@
             const tbody = document.getElementById('tbody-tabela-abc');
             const termoFiltro = (document.getElementById('filtro-tabela-abc')?.value || '').toLowerCase();
             
-            // O Frontend agora é 100% dependente do Backend para a Curva ABC! (Apenas renderiza)
             let dadosABC = [...(estadoGlobal.abcInsumos || [])];
             
             if (termoFiltro) {
@@ -853,18 +987,7 @@
             });
 
             if (dadosABC.length === 0) {
-                tbody.innerHTML = `
-                <tr>
-                    <td colspan="6" class="p-8 text-center text-slate-500">
-                        <i class="fas fa-exclamation-triangle text-yellow-500 text-3xl mb-3 block"></i>
-                        <p class="font-bold text-slate-700 text-lg">Nenhum dado recebido do Backend</p>
-                        <p class="text-sm mt-2 max-w-lg mx-auto">Se você já atualizou o código no Apps Script, verifique dois pontos cruciais:</p>
-                        <ul class="text-xs text-left inline-block mt-3 bg-slate-50 p-4 rounded border border-slate-200 shadow-inner">
-                            <li class="mb-1"><b>1. O Mantra do Deploy:</b> Você clicou em <i>Implantar > Gerenciar Implantações > Editar > <b>NOVA VERSÃO</b></i>?</li>
-                            <li><b>2. Nome da Aba:</b> A aba na planilha se chama exatamente <b>ABC_INSUMO</b> (sem espaços extras ou "S" no final)?</li>
-                        </ul>
-                    </td>
-                </tr>`;
+                tbody.innerHTML = `<tr><td colspan="6" class="p-8 text-center text-slate-500">Nenhum insumo encontrado. Verifique se o backend está enviando os dados.</td></tr>`;
             }
 
             document.querySelectorAll('[id^="icon-sort-abc-"]').forEach(icon => icon.className = 'fas fa-sort ml-1 sort-icon text-slate-500 opacity-50');
@@ -882,7 +1005,6 @@
 
             let encontrou = false;
 
-            // Varre as CPUs para achar onde o Insumo existe
             estadoGlobal.cpus.forEach(cpu => {
                 if(cpu.insumos) {
                     const insUso = cpu.insumos.find(i => String(i.id_insumo) === String(id_insumo));
@@ -893,10 +1015,16 @@
                         const custoNaCpu = coef * pr_unit;
 
                         const tr = document.createElement('tr');
-                        tr.className = "hover:bg-purple-50 transition";
+                        tr.className = "hover:bg-purple-50 transition cursor-pointer";
+                        
+                        tr.onclick = () => {
+                            fecharModalComposicoes();
+                            selecionarCPU(cpu.id);
+                        };
+                        
                         tr.innerHTML = `
                             <td class="p-3 font-mono text-xs text-slate-500">${cpu.id}</td>
-                            <td class="p-3 font-bold text-slate-700 cursor-pointer hover:text-purple-600 hover:underline" onclick="fecharModalComposicoes(); selecionarCPU('${cpu.id}')" title="Ir para esta CPU">${cpu.nome}</td>
+                            <td class="p-3 font-bold text-slate-700 hover:text-purple-600 hover:underline" title="Ir para esta CPU">${cpu.nome}</td>
                             <td class="p-3 text-center text-xs text-slate-500">${cpu.unidade}</td>
                             <td class="p-3 text-right font-mono">${coef.toLocaleString('pt-BR', {minimumFractionDigits: 4, maximumFractionDigits: 4})}</td>
                             <td class="p-3 text-center text-xs text-slate-500">${insUso.unid}</td>
@@ -907,9 +1035,7 @@
                 }
             });
 
-            if(!encontrou) {
-                tbody.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-slate-400 italic">Insumo não encontrado em nenhuma composição ativa.</td></tr>`;
-            }
+            if(!encontrou) tbody.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-slate-400 italic">Insumo não encontrado em nenhuma composição ativa.</td></tr>`;
 
             document.getElementById('modal-composicoes-insumo').classList.remove('hidden');
         }
@@ -923,16 +1049,18 @@
         // ==========================================
         function selecionarCPU(id) {
             if (!verificarPendencias()) return;
-            esconderTodasAbas();
-            document.getElementById('dashboard-content').style.display = 'block'; 
-            document.getElementById('btn-salvar').classList.remove('hidden');
-            document.getElementById('container-custo-total-header').classList.remove('hidden');
-            document.getElementById('cpu-unidade').style.display = 'inline-block';
-            if(window.innerWidth < 768) toggleSidebar(); 
 
-            // FIX DA V7: Usar String() para garantir que ID "numero" vs ID "texto" sempre batam perfeitamente
-            const cpuCache = estadoGlobal.cpus.find(c => String(c.id) === String(id));
+            const idBuscado = String(id).trim();
+            const cpuCache = estadoGlobal.cpus.find(c => String(c.id).trim() === idBuscado);
+            
             if(cpuCache) {
+                esconderTodasAbas();
+                document.getElementById('dashboard-content').style.display = 'block'; 
+                document.getElementById('btn-salvar').classList.remove('hidden');
+                document.getElementById('container-custo-total-header').classList.remove('hidden');
+                document.getElementById('cpu-unidade').style.display = 'inline-block';
+                if(window.innerWidth < 768) toggleSidebar(); 
+
                 estadoGlobal.cpuAtual = JSON.parse(JSON.stringify(cpuCache)); 
                 renderizarDashboard();
             } else {
@@ -1053,67 +1181,153 @@
         }
 
         // ==========================================
-        // OUTRAS FUNÇÕES E MOCKS (RESTAURADAS COMPLETAS)
+        // EXPORTAÇÕES (NOVO MODELO ESPECÍFICO)
         // ==========================================
-        function exportarExcel() {
-            if(estadoGlobal.cpus.length === 0) return showToast("Sem CPUs para exportar.", "error");
-            showToast("Gerando Excel...", "info");
+        
+        function exportarFichaCPU() {
+            if(!estadoGlobal.cpuAtual) return showToast("Selecione uma CPU.", "error");
+            showToast("Gerando Ficha Excel...", "info");
+            
+            const c = estadoGlobal.cpuAtual;
+            const pt = parseFloat(c.prod_teorica) || 1;
+            const prat = parseFloat(c.praticabilidade) || 1;
+            const hd = parseFloat(c.horas_dia) || 8.8;
+            let p = hd > 0 ? (pt * prat) / hd : 1; if(p <= 0) p = 1;
+            const qtd = parseFloat(c.quantidade_prevista) || 1;
+            const venda = parseFloat(c.preco_venda) || 0;
+            
+            let custoUnt = 0;
+            let dadosInsumos = [];
+            
+            if(c.insumos) {
+                c.insumos.forEach(ins => {
+                    const coef = parseFloat(ins.coef) || 0;
+                    const pr_unit = parseFloat(ins.pr_unit) || 0;
+                    const total = coef * pr_unit;
+                    custoUnt += total;
+                    dadosInsumos.push({
+                        "Tipo": ins.tipo, "Insumo": ins.descricao, "Unid.": ins.unid,
+                        "Coeficiente": coef, "Preço Unit.": pr_unit, "Custo na CPU": total
+                    });
+                });
+            }
+            
+            const custoTotal = custoUnt * qtd;
+            const fcd = custoTotal > 0 ? (venda * qtd) / custoTotal : 0;
+            
+            let ws_data = [
+                ["ID CPU", c.id, "Nome CPU", c.nome],
+                ["Unidade", c.unidade, "Qtd Prevista", qtd],
+                ["Prod. Teórica/dia", pt, "Fator Pratic.", prat],
+                ["Horas/Dia", hd, "Prod. Efetiva/h", p],
+                ["Custo Unit. (R$)", custoUnt, "Custo Total (R$)", custoTotal],
+                ["Venda Unit. (R$)", venda, "Venda Total (R$)", venda * qtd],
+                ["Fator F/CD", fcd, "", ""],
+                [], // Linha em branco
+                ["TIPO", "DESCRIÇÃO DO INSUMO", "UNID.", "COEFICIENTE", "PREÇO UNIT. (R$)", "CUSTO NA CPU (R$)"]
+            ];
+            
+            dadosInsumos.forEach(ins => {
+                ws_data.push([ins["Tipo"], ins["Insumo"], ins["Unid."], ins["Coeficiente"], ins["Preço Unit."], ins["Custo na CPU"]]);
+            });
+            
+            const ws = XLSX.utils.aoa_to_sheet(ws_data);
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, "Ficha CPU");
+            XLSX.writeFile(wb, `Ficha_CPU_${c.id}_${new Date().toISOString().split('T')[0]}.xlsx`);
+        }
+
+        function exportarListaCPUs() {
+            if(estadoGlobal.cpus.length === 0) return showToast("Sem CPUs cadastradas.", "error");
+            showToast("Gerando Lista de CPUs...", "info");
+            
+            let dadosExcel = estadoGlobal.cpus.map(cpu => {
+                const qtd = parseFloat(cpu.quantidade_prevista) || 1;
+                const vendaUnt = parseFloat(cpu.preco_venda) || 0;
+                let custoUnt = 0;
+                if(cpu.insumos) cpu.insumos.forEach(ins => custoUnt += (parseFloat(ins.coef)||0) * (parseFloat(ins.pr_unit)||0));
+                
+                return {
+                    "ID CPU": cpu.id,
+                    "Serviço": cpu.nome,
+                    "Unid.": cpu.unidade,
+                    "Quantidade": qtd,
+                    "Venda Unit. (R$)": vendaUnt,
+                    "Venda Total (R$)": vendaUnt * qtd,
+                    "Custo Unit. (R$)": custoUnt,
+                    "Custo Total (R$)": custoUnt * qtd,
+                    "F/CD": custoUnt > 0 ? (vendaUnt * qtd) / (custoUnt * qtd) : 0
+                };
+            });
+            
+            const ws = XLSX.utils.json_to_sheet(dadosExcel);
+            const wb = XLSX.utils.book_new(); 
+            XLSX.utils.book_append_sheet(wb, ws, "Lista CPUs");
+            XLSX.writeFile(wb, `Lista_CPUs_${new Date().toISOString().split('T')[0]}.xlsx`);
+        }
+
+        function exportarComposicoes() {
+            if(estadoGlobal.cpus.length === 0) return showToast("Sem CPUs cadastradas.", "error");
+            showToast("Gerando Base de Composições...", "info");
             
             let dadosExcel = [];
             estadoGlobal.cpus.forEach(cpu => {
-                const pt = parseFloat(cpu.prod_teorica) || 1;
-                const prat = parseFloat(cpu.praticabilidade) || 1;
-                const hd = parseFloat(cpu.horas_dia) || 8.8;
-                let p = hd > 0 ? (pt * prat) / hd : 1;
-                if (p <= 0) p = 1;
-
-                const qtd = cpu.quantidade_prevista || 1;
-                const venda = cpu.preco_venda || 0;
-                
-                let custoTotalCPU = 0;
-                if(cpu.insumos) {
+                if(cpu.insumos && cpu.insumos.length > 0) {
                     cpu.insumos.forEach(ins => {
-                        const coef = parseFloat(ins.coef) || 0;
-                        const pr_unit = parseFloat(ins.pr_unit) || 0;
-                        custoTotalCPU += (coef * pr_unit);
-                    });
-                }
-                
-                const custoTotalServico = custoTotalCPU * qtd;
-                const fcd = custoTotalServico > 0 ? ((venda * qtd) / custoTotalServico) : 0;
-
-                if(!cpu.insumos || cpu.insumos.length === 0) {
-                    dadosExcel.push({ 
-                        "ID CPU": cpu.id, "Nome CPU": cpu.nome, "Unidade": cpu.unidade, 
-                        "PT (dia)": pt, "PRAT": prat, "HD": hd, "P (hora)": p, 
-                        "Qtd Prevista": qtd, "Custo Unit": 0, "Custo Total": 0, "Venda Unit": venda, "Venda Total": venda * qtd, "F/CD": fcd,
-                        "Insumo": "-", "Coeficiente": 0, "Custo Linha Unit": 0 
+                        dadosExcel.push({
+                            "ID CPU": cpu.id,
+                            "Nome CPU": cpu.nome,
+                            "Unid. CPU": cpu.unidade,
+                            "ID Insumo": ins.id_insumo,
+                            "Tipo Insumo": ins.tipo,
+                            "Descrição Insumo": ins.descricao,
+                            "Unid. Insumo": ins.unid,
+                            "Coeficiente": parseFloat(ins.coef) || 0,
+                            "Preço Unit. (R$)": parseFloat(ins.pr_unit) || 0,
+                            "Custo na CPU (R$)": (parseFloat(ins.coef) || 0) * (parseFloat(ins.pr_unit) || 0)
+                        });
                     });
                 } else {
-                    cpu.insumos.forEach(ins => {
-                        const coef = parseFloat(ins.coef) || 0;
-                        const pr_unit = parseFloat(ins.pr_unit) || 0;
-                        let custoLinha = coef * pr_unit;
-                        
-                        dadosExcel.push({
-                            "ID CPU": cpu.id, "Nome CPU": cpu.nome, "Unidade": cpu.unidade,
-                            "PT (dia)": pt, "PRAT": prat, "HD": hd, "P (hora)": p,
-                            "Qtd Prevista": qtd, "Custo Unit": custoTotalCPU, "Custo Total Serviço": custoTotalServico, 
-                            "Venda Unit": venda, "Venda Total": venda * qtd, "F/CD": fcd,
-                            "Tipo Insumo": ins.tipo, "Insumo": ins.descricao, "Unid Insumo": ins.unid,
-                            "Coeficiente": coef, "R$ Unit Insumo": pr_unit, "R$ Custo CPU (Linha)": custoLinha
-                        });
+                    dadosExcel.push({
+                        "ID CPU": cpu.id, "Nome CPU": cpu.nome, "Unid. CPU": cpu.unidade,
+                        "ID Insumo": "-", "Tipo Insumo": "-", "Descrição Insumo": "Sem Insumos",
+                        "Unid. Insumo": "-", "Coeficiente": 0, "Preço Unit. (R$)": 0, "Custo na CPU (R$)": 0
                     });
                 }
             });
-
+            
             const ws = XLSX.utils.json_to_sheet(dadosExcel);
-            ws['!cols'] = [{wch:10}, {wch:35}, {wch:8}, {wch:8}, {wch:8}, {wch:8}, {wch:8}, {wch:12}, {wch:12}, {wch:15}, {wch:12}, {wch:15}, {wch:8}, {wch:15}, {wch:40}, {wch:10}, {wch:10}, {wch:12}, {wch:15}];
-            const wb = XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb, ws, "Memória Analítica CPUs");
-            XLSX.writeFile(wb, `Memoria_Analitica_CTime_${new Date().toISOString().split('T')[0]}.xlsx`);
-            showToast("Relatório exportado!", "success");
+            const wb = XLSX.utils.book_new(); 
+            XLSX.utils.book_append_sheet(wb, ws, "Composições");
+            XLSX.writeFile(wb, `Base_Composicoes_${new Date().toISOString().split('T')[0]}.xlsx`);
         }
 
+        function exportarABC() {
+            let dadosABC = estadoGlobal.abcInsumos || [];
+            if(dadosABC.length === 0) return showToast("Sem dados para exportar.", "error");
+            showToast("Gerando Curva ABC...", "info");
+            
+            let dadosExcel = dadosABC.map(c => ({
+                "ID Insumo": c.id_insumo,
+                "Nome": c.descricao,
+                "Unidade": c.unid,
+                "Qtd Total": parseFloat(c.qtdTotal) || 0,
+                "Custo Total (R$)": parseFloat(c.custoTotal) || 0,
+                "% do Custo Total": parseFloat(c.percTotal) || 0
+            }));
+            
+            // Força a ordenação do maior custo para o menor, padrão de Curva ABC
+            dadosExcel.sort((a, b) => b["Custo Total (R$)"] - a["Custo Total (R$)"]);
+            
+            const ws = XLSX.utils.json_to_sheet(dadosExcel);
+            const wb = XLSX.utils.book_new(); 
+            XLSX.utils.book_append_sheet(wb, ws, "ABC Insumos");
+            XLSX.writeFile(wb, `ABC_Insumos_${new Date().toISOString().split('T')[0]}.xlsx`);
+        }
+
+        // ==========================================
+        // OUTROS CÓDIGOS DE MANUTENÇÃO DE INSUMOS E MOCK
+        // ==========================================
         function atualizarInsumo(i, campo, val) { estadoGlobal.cpuAtual.insumos[i][campo] = (campo==='descricao'||campo==='unid') ? val : parseFloat(val)||0; recalcularCPU('insumo'); }
         function removerInsumo(i) { if(confirm("Remover insumo?")) { estadoGlobal.cpuAtual.insumos.splice(i, 1); renderizarInsumos(); recalcularCPU('insumo'); } }
         
@@ -1161,9 +1375,21 @@
 
         function simularDadosMocados() {
             estadoGlobal.bancoInsumos = [{id_insumo:"E1",tipo:"Equipamento",descricao:"Munck",unid:"h",pr_unit:120.5},{id_insumo:"M1",tipo:"Mão de Obra",descricao:"Pedreiro",unid:"h",pr_unit:35}, {id_insumo:"M2",tipo:"Mão de Obra",descricao:"Ajudante",unid:"h",pr_unit:20}, {id_insumo:"MAT1",tipo:"Material",descricao:"Cimento Portland CP-II",unid:"sc",pr_unit:32.50}];
-            estadoGlobal.resumo = { venda_total: 30000000, faturament_direto: 5000000, venda_sem_faturamento_direto: 25000000, custo_direto_total_cpu: 21651478.06, custo_indireto_total: 1000000, custo_total: 22651478.06, pis: 162500, cofis: 750000, iss: 1250000, venda_liquida: 22837500, resultado: 5186021.94, margem_operacional: 17.28 };
             
-            // Simulação da aba "ABC_INSUMO" vinda do Backend
+            estadoGlobal.resumo = { 
+                // Atuais
+                venda_total: 30000000, faturament_direto: 5000000, venda_sem_faturamento_direto: 25000000, 
+                custo_direto_total_cpu: 21651478.06, custo_indireto_total: 1000000, custo_total: 22651478.06, 
+                pis: 162500, cofis: 750000, iss: 1250000, 
+                venda_liquida: 22837500, resultado: 5186021.94, margem_operacional: 17.28,
+
+                // Originais Mockados (Coluna N em diante)
+                orig_venda_total: 28000000, orig_faturament_direto: 5000000, orig_venda_sem_faturamento_direto: 23000000,
+                orig_custo_direto_total_cpu: 18000000.00, orig_custo_indireto_total: 1000000, orig_custo_total: 19000000.00,
+                orig_pis: 150000, orig_cofis: 700000, orig_iss: 1100000,
+                orig_venda_liquida: 21050000, orig_resultado: 2050000.00, orig_margem_operacional: 7.32
+            };
+            
             estadoGlobal.abcInsumos = [
                 { id_insumo: "MAT1", descricao: "Cimento Portland CP-II", unid: "sc", qtdTotal: 1250, custoTotal: 40625, percTotal: 52.3 },
                 { id_insumo: "M1", descricao: "Pedreiro", unid: "h", qtdTotal: 2250, custoTotal: 78750, percTotal: 34.5 },
