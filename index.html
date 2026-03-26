@@ -22,7 +22,6 @@
         .th-sortable:hover { background-color: #334155; }
         .sort-icon { transition: all 0.2s; }
         
-        /* Custom scrollbar para o modal de insumos */
         .custom-scroll::-webkit-scrollbar { width: 6px; }
         .custom-scroll::-webkit-scrollbar-track { background: #f1f5f9; }
         .custom-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
@@ -132,6 +131,7 @@
                 </div>
                 
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- RECEITAS E FATURAMENTO -->
                     <div class="bg-white rounded-lg shadow p-5 border-t-4 border-blue-500">
                         <h4 class="font-bold text-blue-800 border-b border-blue-100 pb-2 mb-4"><i class="fas fa-coins mr-2"></i> Receitas e Faturamento</h4>
                         
@@ -160,10 +160,11 @@
                         </div>
                     </div>
 
+                    <!-- ESTRUTURA DE CUSTOS -->
                     <div class="bg-white rounded-lg shadow p-5 border-t-4 border-orange-500">
                         <h4 class="font-bold text-orange-800 border-b border-orange-100 pb-2 mb-4"><i class="fas fa-tools mr-2"></i> Estrutura de Custos</h4>
                         
-                        <div class="flex justify-between items-start mb-3 border-b border-slate-50 pb-2">
+                        <div class="flex justify-between items-start mb-2 border-b border-slate-50 pb-2">
                             <span class="text-slate-600 font-medium mt-1">Custo Direto Total CPU</span>
                             <div class="text-right">
                                 <div id="res-custo-direto" class="font-bold text-lg text-slate-800 leading-none">R$ 0,00</div>
@@ -171,7 +172,7 @@
                             </div>
                         </div>
                         
-                        <div class="flex justify-between items-start mb-3 border-b border-slate-50 pb-2">
+                        <div class="flex justify-between items-start mb-2 border-b border-slate-50 pb-2">
                             <span class="text-slate-600 font-medium mt-1">Custo Indireto Total</span>
                             <div class="text-right">
                                 <div id="res-custo-indireto" class="font-bold text-lg text-slate-800 leading-none">R$ 0,00</div>
@@ -179,7 +180,41 @@
                             </div>
                         </div>
 
-                        <div class="flex justify-between items-start mt-4 pt-3 border-t">
+                        <!-- NOVAS LINHAS DE CUSTO ADICIONADAS AQUI -->
+                        <div class="flex justify-between items-start mb-2 border-b border-slate-50 pb-2 bg-orange-50/30 p-1 rounded">
+                            <span class="text-slate-500 text-sm mt-1">Custo Comercial</span>
+                            <div class="text-right">
+                                <div id="res-custo-comercial" class="font-bold text-sm text-slate-700 leading-none">R$ 0,00</div>
+                                <div class="text-[10px] text-slate-400 mt-1">Orçado: <span id="orig-custo-comercial">R$ 0,00</span> <span id="diff-custo-comercial" class="ml-1"></span></div>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-between items-start mb-2 border-b border-slate-50 pb-2 bg-orange-50/30 p-1 rounded">
+                            <span class="text-slate-500 text-sm mt-1">Seguro de Risco Engenharia</span>
+                            <div class="text-right">
+                                <div id="res-seguro-risco" class="font-bold text-sm text-slate-700 leading-none">R$ 0,00</div>
+                                <div class="text-[10px] text-slate-400 mt-1">Orçado: <span id="orig-seguro-risco">R$ 0,00</span> <span id="diff-seguro-risco" class="ml-1"></span></div>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-between items-start mb-2 border-b border-slate-50 pb-2 bg-orange-50/30 p-1 rounded">
+                            <span class="text-slate-500 text-sm mt-1">Custo Adm das UN's</span>
+                            <div class="text-right">
+                                <div id="res-custo-adm" class="font-bold text-sm text-slate-700 leading-none">R$ 0,00</div>
+                                <div class="text-[10px] text-slate-400 mt-1">Orçado: <span id="orig-custo-adm">R$ 0,00</span> <span id="diff-custo-adm" class="ml-1"></span></div>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-between items-start mb-2 border-b border-slate-50 pb-2 bg-orange-50/30 p-1 rounded">
+                            <span class="text-slate-500 text-sm mt-1">Risco Inflacionário</span>
+                            <div class="text-right">
+                                <div id="res-risco-inflacionario" class="font-bold text-sm text-slate-700 leading-none">R$ 0,00</div>
+                                <div class="text-[10px] text-slate-400 mt-1">Orçado: <span id="orig-risco-inflacionario">R$ 0,00</span> <span id="diff-risco-inflacionario" class="ml-1"></span></div>
+                            </div>
+                        </div>
+                        <!-- FIM NOVAS LINHAS -->
+
+                        <div class="flex justify-between items-start mt-4 pt-3 border-t border-orange-200">
                             <span class="font-bold text-slate-700 mt-1">Custo Total Global</span>
                             <div class="text-right">
                                 <div id="res-custo-total" class="font-black text-xl text-orange-600 leading-none">R$ 0,00</div>
@@ -188,6 +223,7 @@
                         </div>
                     </div>
 
+                    <!-- IMPOSTOS -->
                     <div class="bg-white rounded-lg shadow p-5 border-t-4 border-red-500">
                         <h4 class="font-bold text-red-800 border-b border-red-100 pb-2 mb-4"><i class="fas fa-percentage mr-2"></i> Impostos</h4>
                         
@@ -224,6 +260,7 @@
                         </div>
                     </div>
 
+                    <!-- DRE FINAL -->
                     <div class="bg-slate-800 text-white rounded-lg shadow p-5 border-t-4 border-emerald-500 relative overflow-hidden">
                         <i class="fas fa-chart-line absolute -bottom-4 -right-4 text-8xl text-slate-700 opacity-50"></i>
                         <h4 class="font-bold text-emerald-400 border-b border-slate-700 pb-2 mb-4 relative z-10"><i class="fas fa-trophy mr-2"></i> DRE / Resultado do Contrato</h4>
@@ -296,9 +333,7 @@
             </div>
         </div>
 
-        <!-- ========================================== -->
-        <!-- ABA: ABC DE INSUMOS                        -->
-        <!-- ========================================== -->
+        <!-- ABA: ABC DE INSUMOS -->
         <div id="abc-insumos-content" class="flex-1 overflow-y-auto p-4 md:p-6 bg-slate-100 hidden">
             <div class="max-w-7xl mx-auto bg-white rounded-lg shadow border border-slate-200">
                 <div class="p-4 border-b flex flex-col md:flex-row justify-between items-center bg-slate-50 rounded-t-lg gap-4">
@@ -328,9 +363,7 @@
                                 <th class="p-3 text-center border-b border-slate-700 cursor-pointer th-sortable" onclick="sortTableABC('percTotal')">% do Custo Total <i class="fas fa-sort ml-1 sort-icon text-slate-500 opacity-50" id="icon-sort-abc-percTotal"></i></th>
                             </tr>
                         </thead>
-                        <tbody id="tbody-tabela-abc" class="text-sm divide-y divide-slate-200">
-                            <!-- Inserido dinamicamente -->
-                        </tbody>
+                        <tbody id="tbody-tabela-abc" class="text-sm divide-y divide-slate-200"></tbody>
                     </table>
                 </div>
             </div>
@@ -493,7 +526,7 @@
         </div>
     </div>
 
-    <!-- NOVO MODAL: LISTA DE COMPOSIÇÕES DO INSUMO -->
+    <!-- MODAL DE COMPOSIÇÕES -->
     <div id="modal-composicoes-insumo" class="fixed inset-0 bg-black bg-opacity-60 z-50 hidden flex items-center justify-center p-4">
         <div class="bg-white rounded-lg shadow-2xl w-full max-w-4xl flex flex-col max-h-[90vh]">
             <div class="p-4 border-b flex justify-between items-center bg-purple-50 rounded-t-lg border-purple-200">
@@ -515,9 +548,7 @@
                             <th class="p-3 border-b text-right" title="Custo Unitário na CPU (Coef x Preço)">Custo na CPU (R$)</th>
                         </tr>
                     </thead>
-                    <tbody id="tbody-modal-composicoes" class="text-sm divide-y divide-slate-100">
-                        <!-- Inserido via JS -->
-                    </tbody>
+                    <tbody id="tbody-modal-composicoes" class="text-sm divide-y divide-slate-100"></tbody>
                 </table>
             </div>
             <div class="p-3 bg-slate-50 border-t border-slate-200 text-right">
@@ -526,7 +557,6 @@
         </div>
     </div>
 
-    <!-- TOAST -->
     <div id="toast" class="fixed bottom-4 right-4 bg-slate-800 text-white px-4 py-3 rounded shadow-xl transform transition-transform duration-300 translate-y-20 opacity-0 flex items-center z-50">
         <i id="toast-icon" class="fas fa-info-circle mr-2"></i><span id="toast-msg">Mensagem</span>
     </div>
@@ -542,17 +572,10 @@
         let isRendering = false;
         let pAnterior = null; 
 
-        // Sort Tabela CPU
-        let currentSortColCPU = 'id';
-        let currentSortDirCPU = 'asc';
+        let currentSortColCPU = 'id'; let currentSortDirCPU = 'asc';
+        let currentSortColABC = 'custoTotal'; let currentSortDirABC = 'desc'; 
 
-        // Sort Tabela ABC
-        let currentSortColABC = 'custoTotal';
-        let currentSortDirABC = 'desc'; 
-
-        // ==========================================
-        // SISTEMA DE LOGIN GOOGLE (GSI)
-        // ==========================================
+        // LOGIN GOOGLE
         window.onload = () => {
             if (typeof google !== 'undefined' && google.accounts) {
                 google.accounts.id.initialize({
@@ -563,9 +586,7 @@
                     document.getElementById("buttonDiv"),
                     { theme: "outline", size: "large", width: "100%", text: "continue_with" }
                 );
-            } else {
-                mostrarErroLogin("A biblioteca do Google não pôde ser carregada.");
-            }
+            } else { mostrarErroLogin("A biblioteca do Google não pôde ser carregada."); }
         };
 
         function parseJwt(token) {
@@ -602,9 +623,6 @@
             carregarListaCPUs();
         }
 
-        // ==========================================
-        // FUNÇÕES GERAIS
-        // ==========================================
         function registrarAlteracao() {
             if (!estadoGlobal.cpuAtual || isRendering) return;
             alteracoesPendentes = true;
@@ -644,21 +662,14 @@
                 const res = await fetch(url);
                 const json = await res.json();
                 
-                console.log("Dados recebidos do Apps Script:", json.dados);
-                
                 if(json.status === "sucesso") {
                     estadoGlobal.cpus = json.dados.cpus; 
                     estadoGlobal.bancoInsumos = json.dados.bancoInsumos;
                     estadoGlobal.resumo = json.dados.resumo || {};
                     estadoGlobal.abcInsumos = json.dados.abcInsumos || []; 
                     renderizarMenuLateral();
-                } else {
-                    showToast("Erro retornado pela planilha.", "error");
-                }
-            } catch (e) { 
-                showToast("Erro de conexão.", "error"); 
-                simularDadosMocados(); 
-            }
+                } else { showToast("Erro retornado pela planilha.", "error"); }
+            } catch (e) { showToast("Erro de conexão.", "error"); simularDadosMocados(); }
         }
 
         function renderizarMenuLateral() {
@@ -679,7 +690,6 @@
             document.getElementById('resumo-content').style.display = 'none';
             document.getElementById('tabela-cpus-content').style.display = 'none';
             document.getElementById('abc-insumos-content').style.display = 'none';
-            
             document.getElementById('btn-salvar').classList.add('hidden');
             document.getElementById('container-custo-total-header').classList.add('hidden');
             document.getElementById('cpu-unidade').style.display = 'none';
@@ -694,7 +704,7 @@
         }
 
         // ==========================================
-        // ABA: RESUMO (ATUALIZADA COM DESVIOS)
+        // ABA: RESUMO
         // ==========================================
         function abrirAbaResumo() {
             if (!verificarPendencias()) return;
@@ -715,60 +725,48 @@
         async function atualizarResumoManual() {
             const btn = document.getElementById('btn-atualizar-resumo');
             const icon = document.getElementById('icon-atualizar-resumo');
-            icon.classList.add('fa-spin');
-            btn.disabled = true;
-            btn.classList.add('opacity-75');
-
+            icon.classList.add('fa-spin'); btn.disabled = true; btn.classList.add('opacity-75');
             try {
                 await carregarListaCPUs(); 
                 renderizarResumo(); 
                 showToast("Valores atualizados com sucesso da planilha!", "success");
-            } catch (e) {
-                showToast("Erro ao buscar dados atualizados.", "error");
-            } finally {
-                icon.classList.remove('fa-spin');
-                btn.disabled = false;
-                btn.classList.remove('opacity-75');
-            }
+            } catch (e) { showToast("Erro ao buscar dados.", "error"); } 
+            finally { icon.classList.remove('fa-spin'); btn.disabled = false; btn.classList.remove('opacity-75'); }
         }
 
-        // Função utilitária para renderizar as diferenças com cor inteligente
         function renderDiff(atual, original, idDiff, isCost = false, isPercent = false) {
             const el = document.getElementById(idDiff);
             if(!el) return;
             
             const diff = atual - original;
-            
             if (Math.abs(diff) < 0.01) {
-                el.innerHTML = "(=)";
-                el.className = "ml-1 font-bold text-slate-400";
-                return;
+                el.innerHTML = "(=)"; el.className = "ml-1 font-bold text-slate-400"; return;
             }
             
-            // Lógica de Cor: Se for custo, aumento é ruim (vermelho). Se for receita, aumento é bom (verde)
             let isBad = isCost ? diff > 0 : diff < 0;
             let color = isBad ? "text-red-500" : "text-emerald-500";
-            
-            // Ajuste para o card escuro do DRE
-            if (el.closest('.bg-slate-800')) {
-                color = isBad ? "text-red-400" : "text-emerald-400";
-            }
+            if (el.closest('.bg-slate-800')) color = isBad ? "text-red-400" : "text-emerald-400";
             
             const prefix = diff > 0 ? "+" : "";
             const formatted = isPercent ? `${prefix}${diff.toFixed(2)}%` : `${prefix}${formatMoney(diff)}`;
-            
-            el.innerHTML = `(Δ ${formatted})`;
-            el.className = `ml-1 font-bold ${color}`;
+            el.innerHTML = `(Δ ${formatted})`; el.className = `ml-1 font-bold ${color}`;
         }
 
         function renderizarResumo() {
-            // Valores Atuais (Planilha viva)
+            // Valores Atuais
             const venda_total = getResumoVal('venda_total');
             const faturamento_direto = getResumoVal('faturament_direto');
             const venda_sem_faturamento = getResumoVal('venda_sem_faturamento_direto');
             
             const custo_direto = getResumoVal('custo_direto_total_cpu'); 
             const custo_indireto = getResumoVal('custo_indireto_total');
+            
+            // Novos Custos Adicionados (Atuais)
+            const custo_comercial = getResumoVal('custo_comercial');
+            const seguro_risco = getResumoVal('seguro_risco');
+            const custo_adm = getResumoVal('custo_adm');
+            const risco_inflacionario = getResumoVal('risco_inflacionario');
+
             const custo_total = getResumoVal('custo_total');
             
             const pis = getResumoVal('pis');
@@ -778,16 +776,22 @@
 
             const venda_liquida = getResumoVal('venda_liquida');
             const resultado = getResumoVal('resultado');
-            
             let rawMargem = getResumoVal('margem_operacional');
             let margemAtu = rawMargem <= 1 && rawMargem !== 0 ? (rawMargem * 100) : rawMargem;
 
-            // Valores Originais do Orçamento (Coluna N em diante no Sheets)
+            // Valores Orçados
             const orig_venda_total = getResumoVal('orig_venda_total');
             const orig_fat_direto = getResumoVal('orig_faturament_direto');
             const orig_venda_sem_fat = getResumoVal('orig_venda_sem_faturamento_direto');
             const orig_custo_direto = getResumoVal('orig_custo_direto_total_cpu'); 
             const orig_custo_indireto = getResumoVal('orig_custo_indireto_total');
+
+            // Novos Custos Adicionados (Orçados)
+            const orig_custo_comercial = getResumoVal('orig_custo_comercial');
+            const orig_seguro_risco = getResumoVal('orig_seguro_risco');
+            const orig_custo_adm = getResumoVal('orig_custo_adm');
+            const orig_risco_inflacionario = getResumoVal('orig_risco_inflacionario');
+
             const orig_custo_total = getResumoVal('orig_custo_total');
             const orig_pis = getResumoVal('orig_pis');
             const orig_cofins = getResumoVal('orig_cofis') || getResumoVal('orig_cofins');
@@ -795,16 +799,21 @@
             const orig_total_impostos = orig_pis + orig_cofins + orig_iss;
             const orig_venda_liquida = getResumoVal('orig_venda_liquida');
             const orig_resultado = getResumoVal('orig_resultado');
-            
             let rawMargemOrig = getResumoVal('orig_margem_operacional');
             let margemOrig = rawMargemOrig <= 1 && rawMargemOrig !== 0 ? (rawMargemOrig * 100) : rawMargemOrig;
 
-            // ATUALIZANDO TEXTOS PRINCIPAIS
+            // ATUALIZANDO TEXTOS
             document.getElementById('res-venda-total').innerText = formatMoney(venda_total);
             document.getElementById('res-fat-direto').innerText = formatMoney(faturamento_direto);
             document.getElementById('res-venda-sem-fat').innerText = formatMoney(venda_sem_faturamento);
             document.getElementById('res-custo-direto').innerText = formatMoney(custo_direto);
             document.getElementById('res-custo-indireto').innerText = formatMoney(custo_indireto);
+            
+            document.getElementById('res-custo-comercial').innerText = formatMoney(custo_comercial);
+            document.getElementById('res-seguro-risco').innerText = formatMoney(seguro_risco);
+            document.getElementById('res-custo-adm').innerText = formatMoney(custo_adm);
+            document.getElementById('res-risco-inflacionario').innerText = formatMoney(risco_inflacionario);
+
             document.getElementById('res-custo-total').innerText = formatMoney(custo_total);
             document.getElementById('val-pis-calc').innerText = formatMoney(pis);
             document.getElementById('val-cofins-calc').innerText = formatMoney(cofins);
@@ -814,12 +823,17 @@
             document.getElementById('res-resultado').innerText = formatMoney(resultado);
             document.getElementById('res-margem').innerText = margemAtu.toFixed(2) + '%';
 
-            // ATUALIZANDO OS TEXTOS DE "ORÇADO"
             document.getElementById('orig-venda-total').innerText = formatMoney(orig_venda_total);
             document.getElementById('orig-fat-direto').innerText = formatMoney(orig_fat_direto);
             document.getElementById('orig-venda-sem-fat').innerText = formatMoney(orig_venda_sem_fat);
             document.getElementById('orig-custo-direto').innerText = formatMoney(orig_custo_direto);
             document.getElementById('orig-custo-indireto').innerText = formatMoney(orig_custo_indireto);
+            
+            document.getElementById('orig-custo-comercial').innerText = formatMoney(orig_custo_comercial);
+            document.getElementById('orig-seguro-risco').innerText = formatMoney(orig_seguro_risco);
+            document.getElementById('orig-custo-adm').innerText = formatMoney(orig_custo_adm);
+            document.getElementById('orig-risco-inflacionario').innerText = formatMoney(orig_risco_inflacionario);
+
             document.getElementById('orig-custo-total').innerText = formatMoney(orig_custo_total);
             document.getElementById('orig-pis-calc').innerText = formatMoney(orig_pis);
             document.getElementById('orig-cofins-calc').innerText = formatMoney(orig_cofins);
@@ -829,13 +843,19 @@
             document.getElementById('orig-resultado').innerText = formatMoney(orig_resultado);
             document.getElementById('orig-margem').innerText = margemOrig.toFixed(2) + '%';
 
-            // ATUALIZANDO OS CÁLCULOS DE DESVIO (DIFF)
+            // DIFFS
             renderDiff(venda_total, orig_venda_total, 'diff-venda-total', false);
             renderDiff(faturamento_direto, orig_fat_direto, 'diff-fat-direto', false); 
             renderDiff(venda_sem_faturamento, orig_venda_sem_fat, 'diff-venda-sem-fat', false);
             
-            renderDiff(custo_direto, orig_custo_direto, 'diff-custo-direto', true); // Custo: Positivo é Ruim
+            renderDiff(custo_direto, orig_custo_direto, 'diff-custo-direto', true);
             renderDiff(custo_indireto, orig_custo_indireto, 'diff-custo-indireto', true);
+            
+            renderDiff(custo_comercial, orig_custo_comercial, 'diff-custo-comercial', true);
+            renderDiff(seguro_risco, orig_seguro_risco, 'diff-seguro-risco', true);
+            renderDiff(custo_adm, orig_custo_adm, 'diff-custo-adm', true);
+            renderDiff(risco_inflacionario, orig_risco_inflacionario, 'diff-risco-inflacionario', true);
+
             renderDiff(custo_total, orig_custo_total, 'diff-custo-total', true);
             
             renderDiff(pis, orig_pis, 'diff-pis-calc', true);
@@ -844,10 +864,9 @@
             renderDiff(total_impostos, orig_total_impostos, 'diff-total-impostos', true);
             
             renderDiff(venda_liquida, orig_venda_liquida, 'diff-venda-liquida', false);
-            renderDiff(resultado, orig_resultado, 'diff-resultado', false); // Receita/Lucro: Positivo é Bom
+            renderDiff(resultado, orig_resultado, 'diff-resultado', false); 
             renderDiff(margemAtu, margemOrig, 'diff-margem', false, true);
 
-            // Tratamento visual para o Card Final Escuro
             const elRes = document.getElementById('res-resultado');
             const elMargem = document.getElementById('res-margem');
             if(resultado < 0) {
@@ -860,7 +879,7 @@
         }
 
         // ==========================================
-        // ABA: TABELA DE CPUS
+        // TABELAS E DASHBOARD
         // ==========================================
         function abrirAbaTabela() {
             if (!verificarPendencias()) return;
@@ -928,9 +947,6 @@
             if(activeIcon) activeIcon.className = currentSortDirCPU === 'asc' ? 'fas fa-sort-up ml-1 sort-icon text-blue-500 opacity-100' : 'fas fa-sort-down ml-1 sort-icon text-blue-500 opacity-100';
         }
 
-        // ==========================================
-        // ABA: ABC DE INSUMOS
-        // ==========================================
         function abrirAbaABC() {
             if (!verificarPendencias()) return;
             if(window.innerWidth < 768) toggleSidebar(); 
@@ -949,15 +965,10 @@
         function renderizarTabelaABC() {
             const tbody = document.getElementById('tbody-tabela-abc');
             const termoFiltro = (document.getElementById('filtro-tabela-abc')?.value || '').toLowerCase();
-            
             let dadosABC = [...(estadoGlobal.abcInsumos || [])];
             
             if (termoFiltro) {
-                dadosABC = dadosABC.filter(c => 
-                    String(c.id_insumo).toLowerCase().includes(termoFiltro) || 
-                    String(c.descricao).toLowerCase().includes(termoFiltro) || 
-                    String(c.unid).toLowerCase().includes(termoFiltro)
-                );
+                dadosABC = dadosABC.filter(c => String(c.id_insumo).toLowerCase().includes(termoFiltro) || String(c.descricao).toLowerCase().includes(termoFiltro) || String(c.unid).toLowerCase().includes(termoFiltro));
             }
 
             dadosABC.sort((a, b) => {
@@ -972,9 +983,7 @@
             dadosABC.forEach(c => {
                 const tr = document.createElement('tr');
                 tr.className = "hover:bg-purple-50 transition cursor-pointer group"; 
-                tr.title = "Clique para ver onde este insumo é utilizado";
                 tr.onclick = () => abrirModalComposicoesInsumo(c.id_insumo, c.descricao); 
-                
                 tr.innerHTML = `
                     <td class="p-3 font-mono text-xs text-slate-500 group-hover:text-purple-600 transition">${c.id_insumo}</td>
                     <td class="p-3 font-bold text-slate-700">${c.descricao}</td>
@@ -986,23 +995,16 @@
                 tbody.appendChild(tr);
             });
 
-            if (dadosABC.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="6" class="p-8 text-center text-slate-500">Nenhum insumo encontrado. Verifique se o backend está enviando os dados.</td></tr>`;
-            }
+            if (dadosABC.length === 0) tbody.innerHTML = `<tr><td colspan="6" class="p-8 text-center text-slate-500">Nenhum insumo encontrado.</td></tr>`;
 
             document.querySelectorAll('[id^="icon-sort-abc-"]').forEach(icon => icon.className = 'fas fa-sort ml-1 sort-icon text-slate-500 opacity-50');
             const activeIcon = document.getElementById(`icon-sort-abc-${currentSortColABC}`);
             if(activeIcon) activeIcon.className = currentSortDirABC === 'asc' ? 'fas fa-sort-up ml-1 sort-icon text-purple-500 opacity-100' : 'fas fa-sort-down ml-1 sort-icon text-purple-500 opacity-100';
         }
 
-        // ==========================================
-        // MODAL DE COMPOSIÇÕES (RASTREABILIDADE)
-        // ==========================================
         function abrirModalComposicoesInsumo(id_insumo, nome_insumo) {
             document.getElementById('modal-composicoes-nome').innerText = `Insumo: [${id_insumo}] ${nome_insumo}`;
-            const tbody = document.getElementById('tbody-modal-composicoes');
-            tbody.innerHTML = '';
-
+            const tbody = document.getElementById('tbody-modal-composicoes'); tbody.innerHTML = '';
             let encontrou = false;
 
             estadoGlobal.cpus.forEach(cpu => {
@@ -1010,148 +1012,78 @@
                     const insUso = cpu.insumos.find(i => String(i.id_insumo) === String(id_insumo));
                     if(insUso) {
                         encontrou = true;
-                        const coef = parseFloat(insUso.coef) || 0;
-                        const pr_unit = parseFloat(insUso.pr_unit) || 0;
-                        const custoNaCpu = coef * pr_unit;
-
-                        const tr = document.createElement('tr');
-                        tr.className = "hover:bg-purple-50 transition cursor-pointer";
-                        
-                        tr.onclick = () => {
-                            fecharModalComposicoes();
-                            selecionarCPU(cpu.id);
-                        };
-                        
-                        tr.innerHTML = `
-                            <td class="p-3 font-mono text-xs text-slate-500">${cpu.id}</td>
-                            <td class="p-3 font-bold text-slate-700 hover:text-purple-600 hover:underline" title="Ir para esta CPU">${cpu.nome}</td>
-                            <td class="p-3 text-center text-xs text-slate-500">${cpu.unidade}</td>
-                            <td class="p-3 text-right font-mono">${coef.toLocaleString('pt-BR', {minimumFractionDigits: 4, maximumFractionDigits: 4})}</td>
-                            <td class="p-3 text-center text-xs text-slate-500">${insUso.unid}</td>
-                            <td class="p-3 text-right font-bold text-orange-700">${formatMoney(custoNaCpu)}</td>
-                        `;
+                        const custoNaCpu = (parseFloat(insUso.coef)||0) * (parseFloat(insUso.pr_unit)||0);
+                        const tr = document.createElement('tr'); tr.className = "hover:bg-purple-50 transition cursor-pointer";
+                        tr.onclick = () => { fecharModalComposicoes(); selecionarCPU(cpu.id); };
+                        tr.innerHTML = `<td class="p-3 font-mono text-xs text-slate-500">${cpu.id}</td><td class="p-3 font-bold text-slate-700 hover:text-purple-600">${cpu.nome}</td><td class="p-3 text-center text-xs text-slate-500">${cpu.unidade}</td><td class="p-3 text-right font-mono">${(parseFloat(insUso.coef)||0).toLocaleString('pt-BR', {minimumFractionDigits: 4, maximumFractionDigits: 4})}</td><td class="p-3 text-center text-xs text-slate-500">${insUso.unid}</td><td class="p-3 text-right font-bold text-orange-700">${formatMoney(custoNaCpu)}</td>`;
                         tbody.appendChild(tr);
                     }
                 }
             });
-
-            if(!encontrou) tbody.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-slate-400 italic">Insumo não encontrado em nenhuma composição ativa.</td></tr>`;
-
+            if(!encontrou) tbody.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-slate-400 italic">Insumo não encontrado.</td></tr>`;
             document.getElementById('modal-composicoes-insumo').classList.remove('hidden');
         }
 
-        function fecharModalComposicoes() {
-            document.getElementById('modal-composicoes-insumo').classList.add('hidden');
-        }
+        function fecharModalComposicoes() { document.getElementById('modal-composicoes-insumo').classList.add('hidden'); }
 
-        // ==========================================
-        // ABA: DASHBOARD DE CPU (MANUTENÇÃO)
-        // ==========================================
         function selecionarCPU(id) {
             if (!verificarPendencias()) return;
-
-            const idBuscado = String(id).trim();
-            const cpuCache = estadoGlobal.cpus.find(c => String(c.id).trim() === idBuscado);
-            
+            const cpuCache = estadoGlobal.cpus.find(c => String(c.id).trim() === String(id).trim());
             if(cpuCache) {
-                esconderTodasAbas();
-                document.getElementById('dashboard-content').style.display = 'block'; 
-                document.getElementById('btn-salvar').classList.remove('hidden');
-                document.getElementById('container-custo-total-header').classList.remove('hidden');
+                esconderTodasAbas(); document.getElementById('dashboard-content').style.display = 'block'; 
+                document.getElementById('btn-salvar').classList.remove('hidden'); document.getElementById('container-custo-total-header').classList.remove('hidden');
                 document.getElementById('cpu-unidade').style.display = 'inline-block';
                 if(window.innerWidth < 768) toggleSidebar(); 
-
-                estadoGlobal.cpuAtual = JSON.parse(JSON.stringify(cpuCache)); 
-                renderizarDashboard();
-            } else {
-                showToast("Erro: CPU não encontrada na base de dados.", "error");
-            }
+                estadoGlobal.cpuAtual = JSON.parse(JSON.stringify(cpuCache)); renderizarDashboard();
+            } else { showToast("CPU não encontrada.", "error"); }
         }
 
         function renderizarDashboard() {
-            isRendering = true; 
-            const cpu = estadoGlobal.cpuAtual;
-            document.getElementById('cpu-titulo').innerText = cpu.id + " - " + cpu.nome;
-            document.getElementById('cpu-unidade').innerText = cpu.unidade;
-            
-            document.getElementById('input-pt').value = cpu.prod_teorica || 1;
-            document.getElementById('input-praticabilidade').value = cpu.praticabilidade || 1;
-            document.getElementById('input-hd').value = cpu.horas_dia || 8.8;
-            document.getElementById('input-qtd').value = cpu.quantidade_prevista || 1;
+            isRendering = true; const cpu = estadoGlobal.cpuAtual;
+            document.getElementById('cpu-titulo').innerText = cpu.id + " - " + cpu.nome; document.getElementById('cpu-unidade').innerText = cpu.unidade;
+            document.getElementById('input-pt').value = cpu.prod_teorica || 1; document.getElementById('input-praticabilidade').value = cpu.praticabilidade || 1;
+            document.getElementById('input-hd').value = cpu.horas_dia || 8.8; document.getElementById('input-qtd').value = cpu.quantidade_prevista || 1;
             document.getElementById('input-preco-venda').value = cpu.preco_venda || 0;
-
-            const pt = cpu.prod_teorica || 1; const prat = cpu.praticabilidade || 1; const hd = cpu.horas_dia || 8.8;
-            pAnterior = hd > 0 ? (pt * prat) / hd : 1;
-
-            renderizarInsumos(); 
-            renderizarComentarios(); 
-            recalcularCPU('inicializacao'); 
-            isRendering = false; 
-            limparAlteracao(); 
+            const pt = cpu.prod_teorica || 1; const prat = cpu.praticabilidade || 1; const hd = cpu.horas_dia || 8.8; pAnterior = hd > 0 ? (pt * prat) / hd : 1;
+            renderizarInsumos(); renderizarComentarios(); recalcularCPU('inicializacao'); isRendering = false; limparAlteracao(); 
         }
 
         function renderizarInsumos() { 
-            const tbody = document.getElementById('tabela-insumos');
-            tbody.innerHTML = '';
+            const tbody = document.getElementById('tabela-insumos'); tbody.innerHTML = '';
             estadoGlobal.cpuAtual.insumos.forEach((ins, index) => {
                 let icon = ins.tipo === 'Equipamento' ? '<i class="fas fa-truck text-orange-500"></i>' : ins.tipo === 'Mão de Obra' ? '<i class="fas fa-hard-hat text-blue-500"></i>' : '<i class="fas fa-cube text-slate-400"></i>';
-                let isDinamico = (ins.tipo === 'Equipamento' || ins.tipo === 'Mão de Obra');
-                let classeInput = isDinamico ? "bg-yellow-50 border border-yellow-200" : "bg-slate-100";
-
-                tbody.innerHTML += `
-                    <tr class="border-b hover:bg-slate-50 transition">
-                        <td class="p-3 whitespace-nowrap">${icon} <span class="ml-1 text-slate-500">${ins.tipo || ''}</span></td>
-                        <td class="p-3"><input type="text" value="${ins.descricao || ''}" onchange="atualizarInsumo(${index}, 'descricao', this.value)" class="w-full bg-transparent focus:border-b border-indigo-500 outline-none"></td>
-                        <td class="p-3"><input type="text" value="${ins.unid || ''}" onchange="atualizarInsumo(${index}, 'unid', this.value)" class="w-12 bg-transparent focus:border-b border-indigo-500 outline-none"></td>
-                        <td class="p-3">
-                            <input type="number" step="any" value="${parseFloat(ins.coef).toFixed(4)}" onchange="atualizarInsumo(${index}, 'coef', this.value)" class="w-full px-2 py-1 rounded text-right font-mono ${classeInput}">
-                        </td>
-                        <td class="p-3"><input type="number" step="any" value="${parseFloat(ins.pr_unit).toFixed(2)}" onchange="atualizarInsumo(${index}, 'pr_unit', this.value)" class="w-full bg-slate-100 px-2 py-1 rounded text-right"></td>
-                        <td class="p-3 text-right font-bold text-slate-700" id="linha-total-${index}">R$ 0,00</td>
-                        <td class="p-3 text-center"><button onclick="removerInsumo(${index})" class="text-red-400 hover:text-red-600"><i class="fas fa-trash"></i></button></td>
-                    </tr>`;
+                let isDinamico = (ins.tipo === 'Equipamento' || ins.tipo === 'Mão de Obra'); let classeInput = isDinamico ? "bg-yellow-50 border border-yellow-200" : "bg-slate-100";
+                tbody.innerHTML += `<tr class="border-b hover:bg-slate-50 transition"><td class="p-3 whitespace-nowrap">${icon} <span class="ml-1 text-slate-500">${ins.tipo || ''}</span></td><td class="p-3"><input type="text" value="${ins.descricao || ''}" onchange="atualizarInsumo(${index}, 'descricao', this.value)" class="w-full bg-transparent focus:border-b border-indigo-500 outline-none"></td><td class="p-3"><input type="text" value="${ins.unid || ''}" onchange="atualizarInsumo(${index}, 'unid', this.value)" class="w-12 bg-transparent focus:border-b border-indigo-500 outline-none"></td><td class="p-3"><input type="number" step="any" value="${parseFloat(ins.coef).toFixed(4)}" onchange="atualizarInsumo(${index}, 'coef', this.value)" class="w-full px-2 py-1 rounded text-right font-mono ${classeInput}"></td><td class="p-3"><input type="number" step="any" value="${parseFloat(ins.pr_unit).toFixed(2)}" onchange="atualizarInsumo(${index}, 'pr_unit', this.value)" class="w-full bg-slate-100 px-2 py-1 rounded text-right"></td><td class="p-3 text-right font-bold text-slate-700" id="linha-total-${index}">R$ 0,00</td><td class="p-3 text-center"><button onclick="removerInsumo(${index})" class="text-red-400 hover:text-red-600"><i class="fas fa-trash"></i></button></td></tr>`;
             });
         }
 
         function recalcularCPU(origem = 'outro') { 
             if(!estadoGlobal.cpuAtual) return;
-            const pt = parseFloat(document.getElementById('input-pt').value) || 1;
-            const prat = parseFloat(document.getElementById('input-praticabilidade').value) || 1;
-            const hd = parseFloat(document.getElementById('input-hd').value) || 8.8;
-            const qtd = parseFloat(document.getElementById('input-qtd').value) || 1;
+            const pt = parseFloat(document.getElementById('input-pt').value) || 1; const prat = parseFloat(document.getElementById('input-praticabilidade').value) || 1;
+            const hd = parseFloat(document.getElementById('input-hd').value) || 8.8; const qtd = parseFloat(document.getElementById('input-qtd').value) || 1;
             const precoVenda = parseFloat(document.getElementById('input-preco-venda').value) || 0;
-            
-            let pNovo = hd > 0 ? (pt * prat) / hd : 1;
-            if (pNovo <= 0) pNovo = 1; 
-            
+            let pNovo = hd > 0 ? (pt * prat) / hd : 1; if (pNovo <= 0) pNovo = 1; 
             if (origem === 'produtividade' && pAnterior !== null && !isRendering) {
                 const fatorAjuste = pAnterior / pNovo; let sofreuReajuste = false;
-                estadoGlobal.cpuAtual.insumos.forEach(ins => {
-                    if (ins.tipo === 'Equipamento' || ins.tipo === 'Mão de Obra') { ins.coef = (parseFloat(ins.coef) || 0) * fatorAjuste; sofreuReajuste = true; }
-                });
+                estadoGlobal.cpuAtual.insumos.forEach(ins => { if (ins.tipo === 'Equipamento' || ins.tipo === 'Mão de Obra') { ins.coef = (parseFloat(ins.coef) || 0) * fatorAjuste; sofreuReajuste = true; }});
                 if (sofreuReajuste) { showToast("Coeficientes ajustados com a nova produtividade!", "info"); renderizarInsumos(); }
             }
-            pAnterior = pNovo; 
-            document.getElementById('display-p').innerText = pNovo.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 4});
+            pAnterior = pNovo; document.getElementById('display-p').innerText = pNovo.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 4});
             estadoGlobal.cpuAtual.prod_teorica = pt; estadoGlobal.cpuAtual.praticabilidade = prat; estadoGlobal.cpuAtual.horas_dia = hd; estadoGlobal.cpuAtual.prod_efetiva = pNovo; estadoGlobal.cpuAtual.quantidade_prevista = qtd; estadoGlobal.cpuAtual.preco_venda = precoVenda;
 
             let subEqp = 0; let subOutros = 0; let custoTotalUnitario = 0;
             estadoGlobal.cpuAtual.insumos.forEach((ins, index) => {
-                let custoLinha = (parseFloat(ins.coef) || 0) * (parseFloat(ins.pr_unit) || 0);
-                const cell = document.getElementById(`linha-total-${index}`); if(cell) cell.innerText = formatMoney(custoLinha);
-                if(ins.tipo === 'Equipamento') subEqp += custoLinha; else subOutros += custoLinha;
-                custoTotalUnitario += custoLinha;
+                let custoLinha = (parseFloat(ins.coef) || 0) * (parseFloat(ins.pr_unit) || 0); const cell = document.getElementById(`linha-total-${index}`); if(cell) cell.innerText = formatMoney(custoLinha);
+                if(ins.tipo === 'Equipamento') subEqp += custoLinha; else subOutros += custoLinha; custoTotalUnitario += custoLinha;
             });
 
-            const custoTotalServico = custoTotalUnitario * qtd; const vendaTotal = precoVenda * qtd;
-            const fcd = custoTotalServico > 0 ? (vendaTotal / custoTotalServico) : 0;
+            const custoTotalServico = custoTotalUnitario * qtd; const vendaTotal = precoVenda * qtd; const fcd = custoTotalServico > 0 ? (vendaTotal / custoTotalServico) : 0;
             estadoGlobal.cpuAtual.fator_fcd = fcd;
 
             document.getElementById('sub-equipamentos').innerText = formatMoney(subEqp); document.getElementById('sub-outros').innerText = formatMoney(subOutros);
             document.getElementById('display-custo-unit').innerText = formatMoney(custoTotalUnitario); document.getElementById('display-custo-total').innerText = formatMoney(custoTotalServico);
             document.getElementById('display-venda-total').innerText = formatMoney(vendaTotal); document.getElementById('display-fcd').innerText = fcd.toFixed(2);
             document.getElementById('display-custo-total-servico').innerText = formatMoney(custoTotalServico);
-
             registrarAlteracao();
         }
 
@@ -1162,167 +1094,45 @@
             try {
                 if(API_URL.includes("script.google.com")) {
                     const payload = { action: "salvarCPU", dados: estadoGlobal.cpuAtual, usuario: estadoGlobal.usuarioLogado };
-                    const res = await fetch(API_URL, { method: 'POST', body: JSON.stringify(payload) });
-                    const json = await res.json(); 
-                    if(json.status === "sucesso") {
-                        showToast("Salvo com sucesso!");
-                        const idx = estadoGlobal.cpus.findIndex(c => c.id === estadoGlobal.cpuAtual.id);
-                        if(idx > -1) estadoGlobal.cpus[idx] = JSON.parse(JSON.stringify(estadoGlobal.cpuAtual));
-                        limparAlteracao();
-                    } else { showToast("Erro no servidor: " + json.mensagem, "error"); }
+                    const res = await fetch(API_URL, { method: 'POST', body: JSON.stringify(payload) }); const json = await res.json(); 
+                    if(json.status === "sucesso") { showToast("Salvo com sucesso!"); const idx = estadoGlobal.cpus.findIndex(c => c.id === estadoGlobal.cpuAtual.id); if(idx > -1) estadoGlobal.cpus[idx] = JSON.parse(JSON.stringify(estadoGlobal.cpuAtual)); limparAlteracao(); } 
+                    else { showToast("Erro no servidor: " + json.mensagem, "error"); }
                 } else {
-                    await new Promise(r => setTimeout(r, 600));
-                    const idx = estadoGlobal.cpus.findIndex(c => c.id === estadoGlobal.cpuAtual.id);
-                    if(idx > -1) estadoGlobal.cpus[idx] = JSON.parse(JSON.stringify(estadoGlobal.cpuAtual));
-                    showToast("Salvo com sucesso! (Modo Simulação)"); limparAlteracao();
+                    await new Promise(r => setTimeout(r, 600)); const idx = estadoGlobal.cpus.findIndex(c => c.id === estadoGlobal.cpuAtual.id); if(idx > -1) estadoGlobal.cpus[idx] = JSON.parse(JSON.stringify(estadoGlobal.cpuAtual)); showToast("Salvo com sucesso! (Modo Simulação)"); limparAlteracao();
                 }
-            } catch(e) { showToast("Erro de conexão.", "error"); } 
-            finally { btn.innerHTML = '<i class="fas fa-save mr-1"></i> Salvar'; btn.disabled = false; }
+            } catch(e) { showToast("Erro de conexão.", "error"); } finally { btn.innerHTML = '<i class="fas fa-save mr-1"></i> Salvar'; btn.disabled = false; }
         }
 
         // ==========================================
-        // EXPORTAÇÕES (NOVO MODELO ESPECÍFICO)
+        // EXPORTAÇÕES 
         // ==========================================
-        
         function exportarFichaCPU() {
-            if(!estadoGlobal.cpuAtual) return showToast("Selecione uma CPU.", "error");
-            showToast("Gerando Ficha Excel...", "info");
-            
-            const c = estadoGlobal.cpuAtual;
-            const pt = parseFloat(c.prod_teorica) || 1;
-            const prat = parseFloat(c.praticabilidade) || 1;
-            const hd = parseFloat(c.horas_dia) || 8.8;
-            let p = hd > 0 ? (pt * prat) / hd : 1; if(p <= 0) p = 1;
-            const qtd = parseFloat(c.quantidade_prevista) || 1;
-            const venda = parseFloat(c.preco_venda) || 0;
-            
-            let custoUnt = 0;
-            let dadosInsumos = [];
-            
-            if(c.insumos) {
-                c.insumos.forEach(ins => {
-                    const coef = parseFloat(ins.coef) || 0;
-                    const pr_unit = parseFloat(ins.pr_unit) || 0;
-                    const total = coef * pr_unit;
-                    custoUnt += total;
-                    dadosInsumos.push({
-                        "Tipo": ins.tipo, "Insumo": ins.descricao, "Unid.": ins.unid,
-                        "Coeficiente": coef, "Preço Unit.": pr_unit, "Custo na CPU": total
-                    });
-                });
-            }
-            
-            const custoTotal = custoUnt * qtd;
-            const fcd = custoTotal > 0 ? (venda * qtd) / custoTotal : 0;
-            
-            let ws_data = [
-                ["ID CPU", c.id, "Nome CPU", c.nome],
-                ["Unidade", c.unidade, "Qtd Prevista", qtd],
-                ["Prod. Teórica/dia", pt, "Fator Pratic.", prat],
-                ["Horas/Dia", hd, "Prod. Efetiva/h", p],
-                ["Custo Unit. (R$)", custoUnt, "Custo Total (R$)", custoTotal],
-                ["Venda Unit. (R$)", venda, "Venda Total (R$)", venda * qtd],
-                ["Fator F/CD", fcd, "", ""],
-                [], // Linha em branco
-                ["TIPO", "DESCRIÇÃO DO INSUMO", "UNID.", "COEFICIENTE", "PREÇO UNIT. (R$)", "CUSTO NA CPU (R$)"]
-            ];
-            
-            dadosInsumos.forEach(ins => {
-                ws_data.push([ins["Tipo"], ins["Insumo"], ins["Unid."], ins["Coeficiente"], ins["Preço Unit."], ins["Custo na CPU"]]);
-            });
-            
-            const ws = XLSX.utils.aoa_to_sheet(ws_data);
-            const wb = XLSX.utils.book_new();
-            XLSX.utils.book_append_sheet(wb, ws, "Ficha CPU");
-            XLSX.writeFile(wb, `Ficha_CPU_${c.id}_${new Date().toISOString().split('T')[0]}.xlsx`);
+            if(!estadoGlobal.cpuAtual) return showToast("Selecione uma CPU.", "error"); showToast("Gerando Ficha Excel...", "info");
+            const c = estadoGlobal.cpuAtual; const pt = parseFloat(c.prod_teorica) || 1; const prat = parseFloat(c.praticabilidade) || 1; const hd = parseFloat(c.horas_dia) || 8.8; let p = hd > 0 ? (pt * prat) / hd : 1; if(p <= 0) p = 1; const qtd = parseFloat(c.quantidade_prevista) || 1; const venda = parseFloat(c.preco_venda) || 0;
+            let custoUnt = 0; let dadosInsumos = [];
+            if(c.insumos) { c.insumos.forEach(ins => { const coef = parseFloat(ins.coef) || 0; const pr_unit = parseFloat(ins.pr_unit) || 0; const total = coef * pr_unit; custoUnt += total; dadosInsumos.push({ "Tipo": ins.tipo, "Insumo": ins.descricao, "Unid.": ins.unid, "Coeficiente": coef, "Preço Unit.": pr_unit, "Custo na CPU": total }); }); }
+            const custoTotal = custoUnt * qtd; const fcd = custoTotal > 0 ? (venda * qtd) / custoTotal : 0;
+            let ws_data = [ ["ID CPU", c.id, "Nome CPU", c.nome], ["Unidade", c.unidade, "Qtd Prevista", qtd], ["Prod. Teórica/dia", pt, "Fator Pratic.", prat], ["Horas/Dia", hd, "Prod. Efetiva/h", p], ["Custo Unit. (R$)", custoUnt, "Custo Total (R$)", custoTotal], ["Venda Unit. (R$)", venda, "Venda Total (R$)", venda * qtd], ["Fator F/CD", fcd, "", ""], [], ["TIPO", "DESCRIÇÃO DO INSUMO", "UNID.", "COEFICIENTE", "PREÇO UNIT. (R$)", "CUSTO NA CPU (R$)"] ];
+            dadosInsumos.forEach(ins => { ws_data.push([ins["Tipo"], ins["Insumo"], ins["Unid."], ins["Coeficiente"], ins["Preço Unit."], ins["Custo na CPU"]]); });
+            const ws = XLSX.utils.aoa_to_sheet(ws_data); const wb = XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb, ws, "Ficha CPU"); XLSX.writeFile(wb, `Ficha_CPU_${c.id}_${new Date().toISOString().split('T')[0]}.xlsx`);
         }
 
         function exportarListaCPUs() {
-            if(estadoGlobal.cpus.length === 0) return showToast("Sem CPUs cadastradas.", "error");
-            showToast("Gerando Lista de CPUs...", "info");
-            
-            let dadosExcel = estadoGlobal.cpus.map(cpu => {
-                const qtd = parseFloat(cpu.quantidade_prevista) || 1;
-                const vendaUnt = parseFloat(cpu.preco_venda) || 0;
-                let custoUnt = 0;
-                if(cpu.insumos) cpu.insumos.forEach(ins => custoUnt += (parseFloat(ins.coef)||0) * (parseFloat(ins.pr_unit)||0));
-                
-                return {
-                    "ID CPU": cpu.id,
-                    "Serviço": cpu.nome,
-                    "Unid.": cpu.unidade,
-                    "Quantidade": qtd,
-                    "Venda Unit. (R$)": vendaUnt,
-                    "Venda Total (R$)": vendaUnt * qtd,
-                    "Custo Unit. (R$)": custoUnt,
-                    "Custo Total (R$)": custoUnt * qtd,
-                    "F/CD": custoUnt > 0 ? (vendaUnt * qtd) / (custoUnt * qtd) : 0
-                };
-            });
-            
-            const ws = XLSX.utils.json_to_sheet(dadosExcel);
-            const wb = XLSX.utils.book_new(); 
-            XLSX.utils.book_append_sheet(wb, ws, "Lista CPUs");
-            XLSX.writeFile(wb, `Lista_CPUs_${new Date().toISOString().split('T')[0]}.xlsx`);
+            if(estadoGlobal.cpus.length === 0) return showToast("Sem CPUs cadastradas.", "error"); showToast("Gerando Lista de CPUs...", "info");
+            let dadosExcel = estadoGlobal.cpus.map(cpu => { const qtd = parseFloat(cpu.quantidade_prevista) || 1; const vendaUnt = parseFloat(cpu.preco_venda) || 0; let custoUnt = 0; if(cpu.insumos) cpu.insumos.forEach(ins => custoUnt += (parseFloat(ins.coef)||0) * (parseFloat(ins.pr_unit)||0)); return { "ID CPU": cpu.id, "Serviço": cpu.nome, "Unid.": cpu.unidade, "Quantidade": qtd, "Venda Unit. (R$)": vendaUnt, "Venda Total (R$)": vendaUnt * qtd, "Custo Unit. (R$)": custoUnt, "Custo Total (R$)": custoUnt * qtd, "F/CD": custoUnt > 0 ? (vendaUnt * qtd) / (custoUnt * qtd) : 0 }; });
+            const ws = XLSX.utils.json_to_sheet(dadosExcel); const wb = XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb, ws, "Lista CPUs"); XLSX.writeFile(wb, `Lista_CPUs_${new Date().toISOString().split('T')[0]}.xlsx`);
         }
 
         function exportarComposicoes() {
-            if(estadoGlobal.cpus.length === 0) return showToast("Sem CPUs cadastradas.", "error");
-            showToast("Gerando Base de Composições...", "info");
-            
-            let dadosExcel = [];
-            estadoGlobal.cpus.forEach(cpu => {
-                if(cpu.insumos && cpu.insumos.length > 0) {
-                    cpu.insumos.forEach(ins => {
-                        dadosExcel.push({
-                            "ID CPU": cpu.id,
-                            "Nome CPU": cpu.nome,
-                            "Unid. CPU": cpu.unidade,
-                            "ID Insumo": ins.id_insumo,
-                            "Tipo Insumo": ins.tipo,
-                            "Descrição Insumo": ins.descricao,
-                            "Unid. Insumo": ins.unid,
-                            "Coeficiente": parseFloat(ins.coef) || 0,
-                            "Preço Unit. (R$)": parseFloat(ins.pr_unit) || 0,
-                            "Custo na CPU (R$)": (parseFloat(ins.coef) || 0) * (parseFloat(ins.pr_unit) || 0)
-                        });
-                    });
-                } else {
-                    dadosExcel.push({
-                        "ID CPU": cpu.id, "Nome CPU": cpu.nome, "Unid. CPU": cpu.unidade,
-                        "ID Insumo": "-", "Tipo Insumo": "-", "Descrição Insumo": "Sem Insumos",
-                        "Unid. Insumo": "-", "Coeficiente": 0, "Preço Unit. (R$)": 0, "Custo na CPU (R$)": 0
-                    });
-                }
-            });
-            
-            const ws = XLSX.utils.json_to_sheet(dadosExcel);
-            const wb = XLSX.utils.book_new(); 
-            XLSX.utils.book_append_sheet(wb, ws, "Composições");
-            XLSX.writeFile(wb, `Base_Composicoes_${new Date().toISOString().split('T')[0]}.xlsx`);
+            if(estadoGlobal.cpus.length === 0) return showToast("Sem CPUs cadastradas.", "error"); showToast("Gerando Base de Composições...", "info");
+            let dadosExcel = []; estadoGlobal.cpus.forEach(cpu => { if(cpu.insumos && cpu.insumos.length > 0) { cpu.insumos.forEach(ins => { dadosExcel.push({ "ID CPU": cpu.id, "Nome CPU": cpu.nome, "Unid. CPU": cpu.unidade, "ID Insumo": ins.id_insumo, "Tipo Insumo": ins.tipo, "Descrição Insumo": ins.descricao, "Unid. Insumo": ins.unid, "Coeficiente": parseFloat(ins.coef) || 0, "Preço Unit. (R$)": parseFloat(ins.pr_unit) || 0, "Custo na CPU (R$)": (parseFloat(ins.coef) || 0) * (parseFloat(ins.pr_unit) || 0) }); }); } else { dadosExcel.push({ "ID CPU": cpu.id, "Nome CPU": cpu.nome, "Unid. CPU": cpu.unidade, "ID Insumo": "-", "Tipo Insumo": "-", "Descrição Insumo": "Sem Insumos", "Unid. Insumo": "-", "Coeficiente": 0, "Preço Unit. (R$)": 0, "Custo na CPU (R$)": 0 }); } });
+            const ws = XLSX.utils.json_to_sheet(dadosExcel); const wb = XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb, ws, "Composições"); XLSX.writeFile(wb, `Base_Composicoes_${new Date().toISOString().split('T')[0]}.xlsx`);
         }
 
         function exportarABC() {
-            let dadosABC = estadoGlobal.abcInsumos || [];
-            if(dadosABC.length === 0) return showToast("Sem dados para exportar.", "error");
-            showToast("Gerando Curva ABC...", "info");
-            
-            let dadosExcel = dadosABC.map(c => ({
-                "ID Insumo": c.id_insumo,
-                "Nome": c.descricao,
-                "Unidade": c.unid,
-                "Qtd Total": parseFloat(c.qtdTotal) || 0,
-                "Custo Total (R$)": parseFloat(c.custoTotal) || 0,
-                "% do Custo Total": parseFloat(c.percTotal) || 0
-            }));
-            
-            // Força a ordenação do maior custo para o menor, padrão de Curva ABC
-            dadosExcel.sort((a, b) => b["Custo Total (R$)"] - a["Custo Total (R$)"]);
-            
-            const ws = XLSX.utils.json_to_sheet(dadosExcel);
-            const wb = XLSX.utils.book_new(); 
-            XLSX.utils.book_append_sheet(wb, ws, "ABC Insumos");
-            XLSX.writeFile(wb, `ABC_Insumos_${new Date().toISOString().split('T')[0]}.xlsx`);
+            let dadosABC = estadoGlobal.abcInsumos || []; if(dadosABC.length === 0) return showToast("Sem dados para exportar.", "error"); showToast("Gerando Curva ABC...", "info");
+            let dadosExcel = dadosABC.map(c => ({ "ID Insumo": c.id_insumo, "Nome": c.descricao, "Unidade": c.unid, "Qtd Total": parseFloat(c.qtdTotal) || 0, "Custo Total (R$)": parseFloat(c.custoTotal) || 0, "% do Custo Total": parseFloat(c.percTotal) || 0 })); dadosExcel.sort((a, b) => b["Custo Total (R$)"] - a["Custo Total (R$)"]);
+            const ws = XLSX.utils.json_to_sheet(dadosExcel); const wb = XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb, ws, "ABC Insumos"); XLSX.writeFile(wb, `ABC_Insumos_${new Date().toISOString().split('T')[0]}.xlsx`);
         }
 
         // ==========================================
@@ -1330,88 +1140,42 @@
         // ==========================================
         function atualizarInsumo(i, campo, val) { estadoGlobal.cpuAtual.insumos[i][campo] = (campo==='descricao'||campo==='unid') ? val : parseFloat(val)||0; recalcularCPU('insumo'); }
         function removerInsumo(i) { if(confirm("Remover insumo?")) { estadoGlobal.cpuAtual.insumos.splice(i, 1); renderizarInsumos(); recalcularCPU('insumo'); } }
-        
-        function abrirModalInsumo() {
-            const sel = document.getElementById('select-insumo-base'); 
-            const insumosOrdenados = estadoGlobal.bancoInsumos.filter(ins => ins && ins.id_insumo && String(ins.id_insumo).trim() !== "").sort((a, b) => String(a.descricao || "").localeCompare(String(b.descricao || "")));
-            let htmlOptions = '<option value="" disabled selected>Selecione um insumo da base...</option>';
-            insumosOrdenados.forEach(ins => { htmlOptions += `<option value="${ins.id_insumo}">[${ins.tipo}] ${ins.descricao} - R$ ${parseFloat(ins.pr_unit).toFixed(2)}/${ins.unid}</option>`; });
-            sel.innerHTML = htmlOptions; document.getElementById('modal-insumo').classList.remove('hidden');
-        }
-
+        function abrirModalInsumo() { const sel = document.getElementById('select-insumo-base'); const insumosOrdenados = estadoGlobal.bancoInsumos.filter(ins => ins && ins.id_insumo && String(ins.id_insumo).trim() !== "").sort((a, b) => String(a.descricao || "").localeCompare(String(b.descricao || ""))); let htmlOptions = '<option value="" disabled selected>Selecione um insumo da base...</option>'; insumosOrdenados.forEach(ins => { htmlOptions += `<option value="${ins.id_insumo}">[${ins.tipo}] ${ins.descricao} - R$ ${parseFloat(ins.pr_unit).toFixed(2)}/${ins.unid}</option>`; }); sel.innerHTML = htmlOptions; document.getElementById('modal-insumo').classList.remove('hidden'); }
         function fecharModalInsumo() { document.getElementById('modal-insumo').classList.add('hidden'); }
-        function addInsumoExistente() {
-            const insId = document.getElementById('select-insumo-base').value; if(!insId) return showToast("Selecione um insumo.", "error");
-            const base = estadoGlobal.bancoInsumos.find(i => i.id_insumo === insId);
-            if(base) { estadoGlobal.cpuAtual.insumos.push({ ...base, coef: 1 }); fecharModalInsumo(); renderizarInsumos(); recalcularCPU('insumo'); }
-        }
-
-        async function cadastrarEAdicionarInsumo() {
-            const n = { id_insumo: "NEW_"+Date.now(), tipo: document.getElementById('novo-insumo-tipo').value, descricao: document.getElementById('novo-insumo-desc').value, unid: document.getElementById('novo-insumo-unid').value, pr_unit: parseFloat(document.getElementById('novo-insumo-preco').value)||0 };
-            if(!n.descricao || !n.unid) return showToast("Preencha descrição e unidade.", "error");
-            if(API_URL.includes("script.google.com")) {
-                const payload = { action: "cadastrarInsumo", dados: n, usuario: estadoGlobal.usuarioLogado };
-                const res = await fetch(API_URL, { method: 'POST', body: JSON.stringify(payload) });
-                const json = await res.json(); if(json.novo_id) n.id_insumo = json.novo_id;
-            }
-            estadoGlobal.bancoInsumos.push(n); estadoGlobal.cpuAtual.insumos.push({ ...n, coef: 1 });
-            fecharModalInsumo(); renderizarInsumos(); recalcularCPU('insumo');
-        }
-
-        function renderizarComentarios() { 
-            const lista = document.getElementById('lista-comentarios'); lista.innerHTML = '';
-            estadoGlobal.cpuAtual.comentarios.forEach(c => lista.innerHTML += `<div class="bg-indigo-50 p-3 rounded border text-sm"><div class="flex justify-between font-bold text-indigo-800 mb-1"><span><i class="fas fa-user-circle"></i> ${c.autor}</span><span class="font-normal text-xs text-indigo-400">${c.data}</span></div><p class="text-slate-700">${c.texto}</p></div>`);
-        }
-        
-        function addComentario() { 
-            const txt = document.getElementById('novo-comentario').value; if(!txt) return;
-            const nomeAutor = estadoGlobal.usuarioLogado ? estadoGlobal.usuarioLogado.split('@')[0] : "Usuário Web";
-            
-            estadoGlobal.cpuAtual.comentarios.unshift({ data: new Date().toISOString().split('T')[0], autor: nomeAutor, texto: txt });
-            document.getElementById('novo-comentario').value = ''; 
-            renderizarComentarios();
-            registrarAlteracao(); 
-        }
+        function addInsumoExistente() { const insId = document.getElementById('select-insumo-base').value; if(!insId) return showToast("Selecione um insumo.", "error"); const base = estadoGlobal.bancoInsumos.find(i => i.id_insumo === insId); if(base) { estadoGlobal.cpuAtual.insumos.push({ ...base, coef: 1 }); fecharModalInsumo(); renderizarInsumos(); recalcularCPU('insumo'); } }
+        async function cadastrarEAdicionarInsumo() { const n = { id_insumo: "NEW_"+Date.now(), tipo: document.getElementById('novo-insumo-tipo').value, descricao: document.getElementById('novo-insumo-desc').value, unid: document.getElementById('novo-insumo-unid').value, pr_unit: parseFloat(document.getElementById('novo-insumo-preco').value)||0 }; if(!n.descricao || !n.unid) return showToast("Preencha descrição e unidade.", "error"); if(API_URL.includes("script.google.com")) { const payload = { action: "cadastrarInsumo", dados: n, usuario: estadoGlobal.usuarioLogado }; const res = await fetch(API_URL, { method: 'POST', body: JSON.stringify(payload) }); const json = await res.json(); if(json.novo_id) n.id_insumo = json.novo_id; } estadoGlobal.bancoInsumos.push(n); estadoGlobal.cpuAtual.insumos.push({ ...n, coef: 1 }); fecharModalInsumo(); renderizarInsumos(); recalcularCPU('insumo'); }
+        function renderizarComentarios() { const lista = document.getElementById('lista-comentarios'); lista.innerHTML = ''; estadoGlobal.cpuAtual.comentarios.forEach(c => lista.innerHTML += `<div class="bg-indigo-50 p-3 rounded border text-sm"><div class="flex justify-between font-bold text-indigo-800 mb-1"><span><i class="fas fa-user-circle"></i> ${c.autor}</span><span class="font-normal text-xs text-indigo-400">${c.data}</span></div><p class="text-slate-700">${c.texto}</p></div>`); }
+        function addComentario() { const txt = document.getElementById('novo-comentario').value; if(!txt) return; const nomeAutor = estadoGlobal.usuarioLogado ? estadoGlobal.usuarioLogado.split('@')[0] : "Usuário Web"; estadoGlobal.cpuAtual.comentarios.unshift({ data: new Date().toISOString().split('T')[0], autor: nomeAutor, texto: txt }); document.getElementById('novo-comentario').value = ''; renderizarComentarios(); registrarAlteracao(); }
 
         function simularDadosMocados() {
             estadoGlobal.bancoInsumos = [{id_insumo:"E1",tipo:"Equipamento",descricao:"Munck",unid:"h",pr_unit:120.5},{id_insumo:"M1",tipo:"Mão de Obra",descricao:"Pedreiro",unid:"h",pr_unit:35}, {id_insumo:"M2",tipo:"Mão de Obra",descricao:"Ajudante",unid:"h",pr_unit:20}, {id_insumo:"MAT1",tipo:"Material",descricao:"Cimento Portland CP-II",unid:"sc",pr_unit:32.50}];
             
             estadoGlobal.resumo = { 
-                // Atuais
                 venda_total: 30000000, faturament_direto: 5000000, venda_sem_faturamento_direto: 25000000, 
-                custo_direto_total_cpu: 21651478.06, custo_indireto_total: 1000000, custo_total: 22651478.06, 
-                pis: 162500, cofis: 750000, iss: 1250000, 
-                venda_liquida: 22837500, resultado: 5186021.94, margem_operacional: 17.28,
+                custo_direto_total_cpu: 21651478.06, custo_indireto_total: 1000000, 
+                
+                // MOCKS ATUAIS
+                custo_comercial: 120000, seguro_risco: 50000, custo_adm: 300000, risco_inflacionario: 150000,
+                
+                custo_total: 23271478.06, pis: 162500, cofis: 750000, iss: 1250000, 
+                venda_liquida: 22837500, resultado: 4566021.94, margem_operacional: 15.22,
 
-                // Originais Mockados (Coluna N em diante)
                 orig_venda_total: 28000000, orig_faturament_direto: 5000000, orig_venda_sem_faturamento_direto: 23000000,
-                orig_custo_direto_total_cpu: 18000000.00, orig_custo_indireto_total: 1000000, orig_custo_total: 19000000.00,
-                orig_pis: 150000, orig_cofis: 700000, orig_iss: 1100000,
-                orig_venda_liquida: 21050000, orig_resultado: 2050000.00, orig_margem_operacional: 7.32
+                orig_custo_direto_total_cpu: 18000000.00, orig_custo_indireto_total: 1000000, 
+                
+                // MOCKS ORÇADOS
+                orig_custo_comercial: 100000, orig_seguro_risco: 45000, orig_custo_adm: 250000, orig_risco_inflacionario: 100000,
+
+                orig_custo_total: 19495000.00, orig_pis: 150000, orig_cofis: 700000, orig_iss: 1100000,
+                orig_venda_liquida: 21050000, orig_resultado: 1555000.00, orig_margem_operacional: 5.55
             };
             
-            estadoGlobal.abcInsumos = [
-                { id_insumo: "MAT1", descricao: "Cimento Portland CP-II", unid: "sc", qtdTotal: 1250, custoTotal: 40625, percTotal: 52.3 },
-                { id_insumo: "M1", descricao: "Pedreiro", unid: "h", qtdTotal: 2250, custoTotal: 78750, percTotal: 34.5 },
-                { id_insumo: "E1", descricao: "Munck", unid: "h", qtdTotal: 44, custoTotal: 5302, percTotal: 13.2 }
-            ];
-
-            estadoGlobal.cpus = [
-                { id:"18010102", nome:"TRANSPORTE ETA", unidade:"GB", prod_teorica:24, praticabilidade:0.85, horas_dia:8.8, prod_efetiva:2.31, quantidade_prevista: 5.5, preco_venda: 15000.00, fator_fcd: 1.25, insumos:[{id_insumo:"E1",tipo:"Equipamento",descricao:"Munck",unid:"h",coef:8,pr_unit:120.5}], comentarios:[] },
-                { id:"05020101", nome:"ALVENARIA BLOCO 14CM", unidade:"M2", prod_teorica:1, praticabilidade:1, horas_dia:8, prod_efetiva:1, quantidade_prevista: 1500, preco_venda: 95.00, fator_fcd: 0.95, insumos:[{id_insumo:"M1",tipo:"Mão de Obra",descricao:"Pedreiro",unid:"h",coef:1.5,pr_unit:35}, {id_insumo:"MAT1",tipo:"Material",descricao:"Cimento Portland CP-II",unid:"sc",coef:0.5,pr_unit:32.50}], comentarios:[] },
-                { id:"03010105", nome:"CONCRETAGEM SIMPLES", unidade:"M3", prod_teorica:1, praticabilidade:1, horas_dia:8, prod_efetiva:1, quantidade_prevista: 250, preco_venda: 120.00, fator_fcd: 1.8, insumos:[{id_insumo:"M2",tipo:"Mão de Obra",descricao:"Ajudante",unid:"h",coef:3,pr_unit:20}, {id_insumo:"MAT1",tipo:"Material",descricao:"Cimento Portland CP-II",unid:"sc",coef:5,pr_unit:32.50}], comentarios:[] }
-            ];
+            estadoGlobal.abcInsumos = [{ id_insumo: "MAT1", descricao: "Cimento Portland CP-II", unid: "sc", qtdTotal: 1250, custoTotal: 40625, percTotal: 52.3 }, { id_insumo: "M1", descricao: "Pedreiro", unid: "h", qtdTotal: 2250, custoTotal: 78750, percTotal: 34.5 }, { id_insumo: "E1", descricao: "Munck", unid: "h", qtdTotal: 44, custoTotal: 5302, percTotal: 13.2 }];
+            estadoGlobal.cpus = [{ id:"18010102", nome:"TRANSPORTE ETA", unidade:"GB", prod_teorica:24, praticabilidade:0.85, horas_dia:8.8, prod_efetiva:2.31, quantidade_prevista: 5.5, preco_venda: 15000.00, fator_fcd: 1.25, insumos:[{id_insumo:"E1",tipo:"Equipamento",descricao:"Munck",unid:"h",coef:8,pr_unit:120.5}], comentarios:[] }, { id:"05020101", nome:"ALVENARIA BLOCO 14CM", unidade:"M2", prod_teorica:1, praticabilidade:1, horas_dia:8, prod_efetiva:1, quantidade_prevista: 1500, preco_venda: 95.00, fator_fcd: 0.95, insumos:[{id_insumo:"M1",tipo:"Mão de Obra",descricao:"Pedreiro",unid:"h",coef:1.5,pr_unit:35}, {id_insumo:"MAT1",tipo:"Material",descricao:"Cimento Portland CP-II",unid:"sc",coef:0.5,pr_unit:32.50}], comentarios:[] }, { id:"03010105", nome:"CONCRETAGEM SIMPLES", unidade:"M3", prod_teorica:1, praticabilidade:1, horas_dia:8, prod_efetiva:1, quantidade_prevista: 250, preco_venda: 120.00, fator_fcd: 1.8, insumos:[{id_insumo:"M2",tipo:"Mão de Obra",descricao:"Ajudante",unid:"h",coef:3,pr_unit:20}, {id_insumo:"MAT1",tipo:"Material",descricao:"Cimento Portland CP-II",unid:"sc",coef:5,pr_unit:32.50}], comentarios:[] }];
             renderizarMenuLateral();
         }
 
-        document.getElementById('buscaCPU').addEventListener('input', e => {
-            const term = e.target.value.toLowerCase();
-            Array.from(document.getElementById('lista-cpus').children).forEach(b => {
-                if(b.tagName === 'BUTTON' && !b.getAttribute('onclick').includes('Aba')) {
-                    b.style.display = b.innerText.toLowerCase().includes(term) ? 'flex' : 'none';
-                }
-            });
-        });
+        document.getElementById('buscaCPU').addEventListener('input', e => { const term = e.target.value.toLowerCase(); Array.from(document.getElementById('lista-cpus').children).forEach(b => { if(b.tagName === 'BUTTON' && !b.getAttribute('onclick').includes('Aba')) { b.style.display = b.innerText.toLowerCase().includes(term) ? 'flex' : 'none'; } }); });
     </script>
 </body>
 </html>
