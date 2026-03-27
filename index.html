@@ -782,22 +782,20 @@
             let rawMargem = getResumoVal('margem_operacional');
             let margemAtu = rawMargem <= 1 && rawMargem !== 0 ? (rawMargem * 100) : rawMargem;
 
-            // Valores Originais do Orçamento (Coluna N em diante no Sheets)
-            const orig_venda_total = getResumoVal('orig_venda_total');
-            const orig_fat_direto = getResumoVal('orig_faturament_direto');
-            const orig_venda_sem_fat = getResumoVal('orig_venda_sem_faturamento_direto');
-            const orig_custo_direto = getResumoVal('orig_custo_direto_total_cpu'); 
-            const orig_custo_indireto = getResumoVal('orig_custo_indireto_total');
-            const orig_custo_total = getResumoVal('orig_custo_total');
-            const orig_pis = getResumoVal('orig_pis');
-            const orig_cofins = getResumoVal('orig_cofis') || getResumoVal('orig_cofins');
-            const orig_iss = getResumoVal('orig_iss');
+            // Valores Originais do Orçamento (Fixados via Hardcode conforme solicitado)
+            const orig_venda_total = 50400000.00;
+            const orig_fat_direto = 2449175.32;
+            const orig_venda_sem_fat = 47950824.68;
+            const orig_custo_direto = 21227185.06; 
+            const orig_custo_indireto = 13744327.94;
+            const orig_custo_total = 34971513.00;
+            const orig_pis = 1438524.74;
+            const orig_cofins = 311680.36;
+            const orig_iss = 1438524.74;
             const orig_total_impostos = orig_pis + orig_cofins + orig_iss;
-            const orig_venda_liquida = getResumoVal('orig_venda_liquida');
-            const orig_resultado = getResumoVal('orig_resultado');
-            
-            let rawMargemOrig = getResumoVal('orig_margem_operacional');
-            let margemOrig = rawMargemOrig <= 1 && rawMargemOrig !== 0 ? (rawMargemOrig * 100) : rawMargemOrig;
+            const orig_venda_liquida = 44762094.84;
+            const orig_resultado = 9790581.84;
+            const margemOrig = 21.87;
 
             // ATUALIZANDO TEXTOS PRINCIPAIS
             document.getElementById('res-venda-total').innerText = formatMoney(venda_total);
@@ -1383,11 +1381,7 @@
                 pis: 162500, cofis: 750000, iss: 1250000, 
                 venda_liquida: 22837500, resultado: 5186021.94, margem_operacional: 17.28,
 
-                // Originais Mockados (Coluna N em diante)
-                orig_venda_total: 28000000, orig_faturament_direto: 5000000, orig_venda_sem_faturamento_direto: 23000000,
-                orig_custo_direto_total_cpu: 18000000.00, orig_custo_indireto_total: 1000000, orig_custo_total: 19000000.00,
-                orig_pis: 150000, orig_cofis: 700000, orig_iss: 1100000,
-                orig_venda_liquida: 21050000, orig_resultado: 2050000.00, orig_margem_operacional: 7.32
+                // Originais Mockados foram removidos para garantir o hardcode seguro
             };
             
             estadoGlobal.abcInsumos = [
